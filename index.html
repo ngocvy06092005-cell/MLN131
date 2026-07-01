@@ -3,685 +3,480 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hệ thống Học tập Tương tác môn MLN131</title>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-    <style>
-        :root {
-            --primary: #cc2a2a;
-            --primary-dark: #991d1d;
-            --secondary: #1e3a8a;
-            --secondary-light: #2563eb;
-            --bg-light: #f8fafc;
-            --text-dark: #0f172a;
-            --border-color: #e2e8f0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 0;
-            line-height: 1.7;
-        }
-
-        .header-banner {
-            background: linear-gradient(135deg, var(--secondary), #1e40af);
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 3px solid var(--primary);
-        }
-
-        .header-banner h1 { margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .header-banner p { margin: 8px 0 0; opacity: 0.85; font-size: 1rem; }
-
-        .navbar {
-            background-color: #ffffff;
-            display: flex;
-            justify-content: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .nav-tab {
-            padding: 14px 18px;
-            color: #475569;
-            text-decoration: none;
-            font-weight: 600;
-            cursor: pointer;
-            border-bottom: 3px solid transparent;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .nav-tab.active, .nav-tab:hover {
-            color: var(--secondary);
-            border-bottom: 3px solid var(--primary);
-            background-color: #f1f5f9;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 25px auto;
-            padding: 0 20px;
-        }
-
-        .content-section {
-            display: none;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-        }
-
-        .content-section.active { display: block; }
-
-        h2 { color: var(--secondary); border-left: 4px solid var(--primary); padding-left: 12px; margin-top: 30px; margin-bottom: 15px; font-size: 1.4rem; }
-        h3 { color: var(--secondary-light); margin-top: 20px; font-size: 1.15rem; }
-        p { margin-bottom: 15px; text-align: justify; }
-
-        .diagram-container {
-            background: #f1f5f9;
-            padding: 20px;
-            border-radius: 6px;
-            margin: 20px 0;
-            border: 1px dashed #cbd5e1;
-        }
-
-        .diagram-title {
-            text-align: center;
-            font-weight: bold;
-            color: var(--secondary);
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .diagram-box {
-            background: var(--secondary);
-            color: white;
-            padding: 12px;
-            text-align: center;
-            border-radius: 4px;
-            font-weight: bold;
-            margin: 10px auto;
-            max-width: 400px;
-        }
-
-        .diagram-arrow {
-            text-align: center;
-            font-size: 20px;
-            color: #64748b;
-            line-height: 1;
-            margin: 5px 0;
-        }
-
-        .diagram-grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .diagram-sub-box {
-            background: #ffffff;
-            border: 2px solid var(--secondary-light);
-            padding: 12px;
-            text-align: center;
-            border-radius: 4px;
-            font-weight: 600;
-            color: var(--secondary);
-        }
-
-        .diagram-two-way {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .two-way-node {
-            flex: 1;
-            background: #ffffff;
-            border: 2px solid var(--text-dark);
-            padding: 15px;
-            text-align: center;
-            border-radius: 6px;
-            font-weight: bold;
-        }
-
-        .two-way-arrows {
-            font-size: 24px;
-            color: var(--primary);
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .summary-accent {
-            background: #fff5f5;
-            border-left: 4px solid var(--primary);
-            padding: 15px 20px;
-            border-radius: 0 6px 6px 0;
-            margin-top: 25px;
-            font-style: italic;
-        }
-
-        .game-card {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .btn {
-            background-color: var(--secondary);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin: 8px;
-        }
-
-        .btn:hover { background-color: #132b66; }
-        .btn-admin { background-color: var(--primary); }
-        .btn-admin:hover { background-color: var(--primary-dark); }
-        .btn-success { background-color: #10b981; }
-        .btn-success:hover { background-color: #059669; }
-
-        .input-field {
-            padding: 10px;
-            width: 80%;
-            max-width: 280px;
-            border: 2px solid #cbd5e1;
-            border-radius: 4px;
-            font-size: 15px;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-
-        #penalty-screen {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(220, 38, 38, 0.97);
-            color: white;
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            font-size: 22px;
-            font-weight: bold;
-        }
-
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .option-btn {
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            padding: 15px 20px;
-            border-radius: 6px;
-            text-align: left;
-            font-size: 15px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.15s;
-        }
-
-        .option-btn:hover {
-            background: #f1f5f9;
-            border-color: var(--secondary-light);
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #ffffff;
-            padding: 12px 20px;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            font-weight: bold;
-            border: 1px solid var(--border-color);
-        }
-
-        .rank-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .rank-table th, .rank-table td {
-            padding: 12px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .rank-table th { background: var(--secondary); color: white; }
-        .rank-table tr:nth-child(even) { background: #f8fafc; }
-        
-        #lobby-list {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-            margin: 15px 0;
-        }
-
-        #lobby-list li {
-            background: #e2e8f0;
-            color: var(--text-dark);
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 13px;
-            border: 1px solid #cbd5e1;
-        }
-    </style>
+    <title>Nhà Nước Pháp Quyền XHCN Việt Nam</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-    <div class="header-banner">
-        <h1>Nghiên Cứu Bộ Máy Nhà Nước Việt Nam</h1>
-        <p>Nền tảng lý thuyết tương tác số hóa & Đấu trường kiểm tra kiến thức Realtime</p>
-    </div>
-
+    <!-- Navbar -->
     <nav class="navbar">
-        <a class="nav-tab active" id="tab-home" onclick="switchTab('home')">Trang Chủ</a>
-        <a class="nav-tab" id="tab-phandau" onclick="switchTab('phandau')">1. Mô hình Nhà nước</a>
-        <a class="nav-tab" id="tab-lythuyet" onclick="switchTab('lythuyet')">2. Vai trò của Đảng</a>
-        <a class="nav-tab" id="tab-phancuoi" onclick="switchTab('phancuoi')">3. Mối liên hệ & Giải trình</a>
-        <a class="nav-tab" id="tab-minigame" onclick="switchTab('minigame')">Màn hình Trò chơi</a>
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚖️</span>
+                <span>Nhà Nước Pháp Quyền XHCN VN</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="#home" class="nav-link active" onclick="navigateTo('home')">Trang Chủ</a>
+                <a href="#content" class="nav-link" onclick="navigateTo('content')">Nội Dung</a>
+                <a href="#game" class="nav-link" onclick="navigateTo('game')">Mini Game</a>
+                <button class="admin-btn" onclick="openAdminPanel()">🔐 Kích hoạt Quyền Admin</button>
+            </div>
+        </div>
     </nav>
 
-    <div class="container">
-        
-        <div id="home" class="content-section active">
-            <div style="text-align: center; padding: 20px 0;">
-                <h2>Không gian Số hóa Kiến thức môn Chính trị học</h2>
-                <p style="max-width: 750px; margin: 0 auto 30px; color: #475569;">Hệ thống hỗ trợ học tập trực quan tương tác, lược bỏ các hình ảnh minh họa không liên quan, tập trung hiển thị hóa sơ đồ cấu trúc vận hành bộ máy và thiết lập phòng kiểm tra trắc nghiệm đồng bộ thời gian thực.</p>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
-                    <div style="background: #fff; border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; cursor: pointer;" onclick="switchTab('phandau')">
-                        <h3 style="margin-top:0;">Mô hình Nhà nước</h3>
-                        <p style="font-size: 13px; color:#64748b; margin:0;">Cơ cấu tổ chức bộ máy, tính thống nhất của quyền lực và nguyên tắc tam quyền phân công.</p>
-                    </div>
-                    <div style="background: #fff; border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; cursor: pointer;" onclick="switchTab('lythuyet')">
-                        <h3 style="margin-top:0;">Vai trò của Đảng</h3>
-                        <p style="font-size: 13px; color:#64748b; margin:0;">Phân tích cơ sở pháp lý Điều 4 Hiến pháp và phương thức hoạch định đường lối quốc gia.</p>
-                    </div>
-                    <div style="background: #fff; border: 1px solid var(--border-color); padding: 20px; border-radius: 6px; cursor: pointer;" onclick="switchTab('phancuoi')">
-                        <h3 style="margin-top:0;">Trách nhiệm giải trình</h3>
-                        <p style="font-size: 13px; color:#64748b; margin:0;">Mối quan hệ pháp lý hai chiều giữa cơ quan quyền lực và nhân dân bầu cử.</p>
-                    </div>
-                </div>
-                <div style="margin-top: 20px; padding: 20px; background: #fffbeb; border: 1px solid #fef3c7; border-radius: 6px; cursor: pointer;" onclick="switchTab('minigame')">
-                    <h3 style="margin-top:0; color:#b45309;">🎮 Bấm để truy cập Đấu trường Realtime</h3>
-                    <p style="font-size: 14px; margin:0; color:#b45309;">Tham gia phòng chờ, thi tài trực tiếp tính điểm cùng cả lớp dưới sự điều khiển của Quản trò.</p>
-                </div>
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Xác Thực Admin</h2>
+                <span class="close" onclick="closeAdminPanel()">&times;</span>
             </div>
-        </div>
-        
-        <div id="phandau" class="content-section">
-            <h2>Mô hình Nhà nước Pháp quyền XHCN Việt Nam</h2>
-            <p>Nhà nước pháp quyền được hiểu một cách chung nhất là một kiểu nhà nước thượng tôn pháp luật, hướng tới các vấn đề phúc lợi cho mọi người, tạo điều kiện cho cá nhân được tự do, bình đẳng và phát huy hết năng lực của mình.</p>
-
-            <div class="diagram-container">
-                <div class="diagram-title">Biểu đồ 1: Nguyên tắc cấu trúc nguồn gốc quyền lực nhà nước</div>
-                <div class="diagram-box" style="background:#b91c1c;">NHÂN DÂN LAO ĐỘNG (Chủ thể tối cao nắm giữ quyền lực)</div>
-                <div class="diagram-arrow">⬇️ (Thông qua bầu cử Dân chủ trực tiếp & đại diện)</div>
-                <div class="diagram-box">QUỐC HỘI VÀ HỘI ĐỒNG NHÂN DÂN CÁC CẤP (Cơ quan quyền lực cao nhất)</div>
-            </div>
-
-            <h3>1. Nguyên tắc quyền lực nhà nước là thống nhất</h3>
-            <p>Quyền lực nhà nước tại Việt Nam không chia cắt mà là một thể thống nhất, tất cả quyền lực nhà nước đều thuộc về nhân dân.</p>
-
-            <h3>2. Sự phân công, phối hợp và kiểm soát giữa ba quyền</h3>
-            <div class="diagram-container">
-                <div class="diagram-title">Biểu đồ 2: Cơ chế vận hành phân công ba nhánh quyền lực</div>
-                <div class="diagram-grid-3">
-                    <div class="diagram-sub-box">🏛️ LẬP PHÁP<br><span style="font-weight:normal; font-size:12px; color:#475569;">Xây dựng hiến pháp, pháp luật, giám sát tối cao công việc quốc gia.</span></div>
-                    <div class="diagram-sub-box">🏢 HÀNH PHÁP<br><span style="font-weight:normal; font-size:12px; color:#475569;">Chính phủ quản lý điều hành xã hội, tổ chức thi hành pháp luật.</span></div>
-                    <div class="diagram-sub-box">⚖️ TƯ PHÁP<br><span style="font-weight:normal; font-size:12px; color:#475569;">Tòa án, Viện kiểm sát xét xử công minh, bảo vệ cán cân công lý.</span></div>
-                </div>
-            </div>
-        </div>
-
-        <div id="lythuyet" class="content-section">
-            <h2>Vai trò lãnh đạo của Đảng Cộng sản Việt Nam đối với Nhà nước</h2>
-            <h3>1. Lực lượng lãnh đạo Nhà nước và xã hội</h3>
-            <p>Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam được xây dựng và hoạt động dưới sự lãnh đạo của Đảng Cộng sản Việt Nam. Đây là đặc trưng cơ bản được khẳng định trong Điều 4 Hiến pháp năm 2013.</p>
-        </div>
-
-        <div id="phancuoi" class="content-section">
-            <h2>Mối liên hệ và trách nhiệm giải trình trước nhân dân</h2>
-            <p>Theo Hiến pháp năm 2013, tất cả quyền lực nhà nước thuộc về Nhân dân. Các cơ quan nhà nước có trách nhiệm báo cáo, giải thích và chịu sự giám sát của Nhân dân.</p>
-
-            <div class="diagram-container">
-                <div class="diagram-title">Biểu đồ 3: Mối quan hệ tương tác trách nhiệm hai chiều</div>
-                <div class="diagram-two-way">
-                    <div class="two-way-node">NHÂN DÂN</div>
-                    <div class="two-way-arrows">Trao quyền lực (Bầu cử) ➔<br>🎰 Trách nhiệm giải trình (Báo cáo)</div>
-                    <div class="two-way-node">CƠ QUAN NHÀ NƯỚC</div>
-                </div>
-            </div>
-        </div>
-
-        <div id="minigame" class="content-section">
-            <div id="screen-join" class="game-card">
-                <h2>Đấu Trường Tri Thức Realtime</h2>
-                <p style="color:#64748b;">Nhập biệt danh để tham gia trận đấu kiểm tra kiến thức.</p>
-                <input type="text" id="username-input" class="input-field" placeholder="Nhập tên của bạn..." maxlength="15"><br>
-                
-                <button class="btn btn-success" onclick="joinOfflineMode()">⚡ CHƠI OFFLINE (TEST NHANH)</button>
-                <button class="btn" onclick="joinLobby()">Vào Phòng Chờ Online</button>
-
-                <div style="margin-top: 25px; font-size: 13px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 15px;">
-                    Dành cho Người quản trò điều phối trận đấu: <br>
-                    <button class="btn btn-admin" style="padding: 6px 12px; font-size: 11px; margin-top: 5px;" onclick="becomeAdmin()">Kích hoạt quyền Admin</button>
-                </div>
-            </div>
-
-            <div id="screen-lobby" class="game-card" style="display:none;">
-                <h2>PHÒNG CHỜ TRÒ CHƠI</h2>
-                <p>Chào mừng <strong id="my-name-display" style="color:var(--primary)"></strong>! Đang đợi lệnh bắt đầu từ hệ thống...</p>
-                <div id="mode-badge" style="font-size:12px; color:#2563eb; font-weight:bold; margin-bottom:10px;">Chế độ trực tuyến</div>
-                <div style="background: #f8fafc; padding: 20px; border-radius: 6px; border: 1px solid #cbd5e1;">
-                    <h4 style="margin-top:0; color:var(--secondary);">Danh sách học sinh online (<span id="player-count">0</span>):</h4>
-                    <ul id="lobby-list"></ul>
-                </div>
-                
-                <div id="local-start-box" style="margin-top: 15px; display:none;">
-                    <button class="btn btn-success" style="font-size:16px;" onclick="enterGame()">BẮT ĐẦU CHƠI NGAY</button>
-                </div>
-
-                <div id="admin-controls" style="display:none; margin-top: 20px; border-top: 2px dashed #cbd5e1; padding-top: 20px;">
-                    <p style="color: var(--primary); font-weight: bold; margin-top:0;">QUYỀN QUẢN TRÒ ADMIN ACTIVE</p>
-                    <button class="btn btn-admin" style="font-size: 16px; padding: 12px 30px;" onclick="startGameByAdmin()">PHÁT LỆNH BẮT ĐẦU TOÀN LỚP</button>
-                </div>
-            </div>
-
-            <div id="screen-game" style="display:none; max-width:650px; margin: 0 auto;">
-                <div class="game-header">
-                    <div>Thời gian: <span id="game-timer" style="color:var(--primary); font-size: 20px;">120</span>s</div>
-                    <div>Điểm số: <span id="game-score" style="color:var(--secondary); font-size: 20px;">0</span></div>
-                </div>
-                <div style="background: #fff; border: 1px solid var(--border-color); padding: 25px; border-radius: 6px; margin-bottom: 20px;">
-                    <h3 id="question-text" style="margin:0; font-size: 1.2rem; color: var(--text-dark);">Đang tải câu hỏi đồng bộ...</h3>
-                </div>
-                <div class="options-list" id="options-container"></div>
-            </div>
-
-            <div id="screen-rank" class="game-card" style="display:none;">
-                <h2>KẾT THÚC - BẢNG XẾP HẠNG TRẬN ĐẤU</h2>
-                <p>Kết quả thi đấu trực tiếp theo thời gian thực của lớp.</p>
-                <table class="rank-table">
-                    <thead>
-                        <tr>
-                            <th>Hạng</th>
-                            <th>Người chơi</th>
-                            <th>Điểm số</th>
-                        </tr>
-                    </thead>
-                    <tbody id="rank-tbody"></tbody>
-                </table>
-                <button class="btn" onclick="location.reload()">Quay lại Trang chủ</button>
+            <div class="modal-body">
+                <input type="password" id="adminPassword" placeholder="Nhập mật khẩu admin" class="admin-input">
+                <button class="btn btn-primary" onclick="verifyAdmin()">Xác Thực</button>
             </div>
         </div>
     </div>
 
-    <div id="penalty-screen">
-        <div>SAI RỒI!</div>
-        <div style="font-size: 16px; font-weight: normal; margin-top: 5px;">Bị trừ 50 điểm và đóng băng màn hình</div>
-        <div style="font-size: 35px; margin-top: 15px; background: rgba(0,0,0,0.2); padding: 5px 20px; border-radius: 4px;" id="penalty-timer">5</div>
-    </div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="home-hero">
+                <div class="hero-content">
+                    <h1>Mô Hình Nhà Nước Pháp Quyền<br><span class="highlight">Xã Hội Chủ Nghĩa Việt Nam</span></h1>
+                    <p class="hero-subtitle">Hiểu rõ về cơ cấu, nguyên tắc và vai trò của Nhà nước trong xã hội</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="navigateTo('content')">Khám Phá Nội Dung</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('game')">Chơi Mini Game</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-circle">
+                        <div class="circle-item">Quyền Lực</div>
+                        <div class="circle-item">Pháp Luật</div>
+                        <div class="circle-item">Nhân Dân</div>
+                    </div>
+                </div>
+            </div>
 
-    <script>
-        const firebaseConfig = { databaseURL: "https://realtime-quiz-fpt-default-rtdb.asia-southeast1.firebasedatabase.app/" };
-        
-        let db = null;
-        let isLocalMode = false;
+            <!-- Features Section -->
+            <section class="features">
+                <h2>Các Nội Dung Chính</h2>
+                <div class="features-grid">
+                    <div class="feature-card" onclick="navigateTo('content'); scrollToSection('structure')">
+                        <div class="feature-icon">🏛️</div>
+                        <h3>Cơ Cấu Tổ Chức</h3>
+                        <p>Tìm hiểu về cấu trúc và tổ chức các cơ quan nhà nước</p>
+                    </div>
+                    <div class="feature-card" onclick="navigateTo('content'); scrollToSection('principles')">
+                        <div class="feature-icon">⚙️</div>
+                        <h3>Nguyên Tắc Vận Hành</h3>
+                        <p>Khám phá các nguyên tắc cơ bản điều chỉnh hoạt động nhà nước</p>
+                    </div>
+                    <div class="feature-card" onclick="navigateTo('content'); scrollToSection('leadership')">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Vai Trò Lãnh Đạo</h3>
+                        <p>Nắm bắt vai trò lãnh đạo của Đảng Cộng sản Việt Nam</p>
+                    </div>
+                    <div class="feature-card" onclick="navigateTo('content'); scrollToSection('accountability')">
+                        <div class="feature-icon">📋</div>
+                        <h3>Trách Nhiệm Giải Trình</h3>
+                        <p>Hiểu rõ về trách nhiệm giải trình của các cơ quan nhà nước</p>
+                    </div>
+                </div>
+            </section>
 
-        try {
-            firebase.initializeApp(firebaseConfig);
-            db = firebase.database();
-        } catch(e) {
-            isLocalMode = true;
-        }
+            <!-- Interactive Stats -->
+            <section class="stats-section">
+                <h2>Thông Tin Nhanh</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Quyền Lực Thống Nhất</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Nhánh Quyền Lực</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">50</div>
+                        <div class="stat-label">Câu Hỏi Ôn Tập</div>
+                    </div>
+                </div>
+            </section>
+        </section>
 
-        const quizData = [
-            { q: "Mô hình Nhà nước pháp quyền XHCN Việt Nam đặt dưới sự lãnh đạo duy nhất của tổ chức nào?", a: ["Mặt trận Tổ quốc", "Đảng Cộng sản Việt Nam", "Quốc hội", "Chính phủ"], c: 1 },
-            { q: "Theo Hiến pháp 2013, tất cả quyền lực nhà nước thuộc về đối tượng nào?", a: ["Các cơ quan tư pháp", "Cán bộ công chức", "Nhân dân", "Ban chấp hành Trung ương"], c: 2 },
-            { q: "Cơ quan nào được xác định là cơ quan quyền lực nhà nước cao nhất tại Việt Nam?", a: ["Quốc hội", "Chính phủ", "Tòa án nhân dân tối cao", "Viện kiểm sát nhân dân tối cao"], c: 0 },
-            { q: "Phương châm nào thể hiện sự giám sát của nhân dân đối với cơ chế kiểm soát quyền lực?", a: ["Dân biết, dân bàn, dân làm, dân kiểm tra", "Làm theo năng lực, hưởng theo nhu cầu", "Thượng tôn pháp luật, kỷ cương nghiêm minh", "Tập trung dân chủ, phân cấp rõ ràng"], c: 0 },
-            { q: "Đặc trưng cơ bản về vai trò của Đảng được khẳng định tại Điều mấy của Hiến pháp 2013?", a: ["Điều 1", "Điều 2", "Điều 4", "Điều 10"], c: 2 },
-            { q: "Đảng Cộng sản Việt Nam thực hiện vai trò lãnh đạo Nhà nước bằng cách nào?", a: ["Trực tiếp làm thay chức năng hành chính", "Bằng cương lĩnh, đường lối, chủ trương và công tác cán bộ", "Tự ban hành các quyết định hành chính cấp tỉnh", "Thay mặt Tòa án xét xử các vụ án"], c: 1 },
-            { q: "Mối liên hệ giữa các cơ quan nhà nước và Nhân dân được khẳng định là mối quan hệ gì?", a: ["Mối quan hệ một chiều từ trên xuống", "Mối quan hệ độc lập không can thiệp", "Mối quan hệ hai chiều phụ thuộc lẫn nhau", "Mối quan hệ tạm thời theo nhiệm kỳ"], c: 2 },
-            { q: "Trách nhiệm giải trình của các cơ quan tư pháp (Tòa án, Viện kiểm sát) thể hiện qua việc gì?", a: ["Bảo đảm xét xử, truy tố tuân thủ Hiến pháp và công khai bản án", "Tự quyết định ngân sách quốc gia", "Thay đổi nội dung Hiến pháp khi cần", "Tổ chức bầu cử Đại biểu Quốc hội"], c: 0 }
-        ];
+        <!-- Content Section -->
+        <section id="content" class="section">
+            <div class="content-header">
+                <h1>Nội Dung Chi Tiết</h1>
+                <p>Tìm hiểu chi tiết về mô hình Nhà nước pháp quyền XHCN Việt Nam</p>
+            </div>
 
-        let myName = "";
-        let myId = "";
-        let isAdmin = false;
-        let score = 0;
-        let currentQuestionIndex = 0;
-        let totalTime = 120;
-        let countdownInterval;
-        let pollingInterval = null;
+            <!-- Navigation Menu -->
+            <div class="content-nav">
+                <button class="content-nav-btn active" onclick="showContentSection('structure')">Cơ Cấu Tổ Chức</button>
+                <button class="content-nav-btn" onclick="showContentSection('principles')">Nguyên Tắc Vận Hành</button>
+                <button class="content-nav-btn" onclick="showContentSection('leadership')">Vai Trò Lãnh Đạo</button>
+                <button class="content-nav-btn" onclick="showContentSection('accountability')">Trách Nhiệm Giải Trình</button>
+            </div>
 
-        function switchTab(tabId) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            const targetTab = document.getElementById('tab-' + tabId);
-            if(targetTab) targetTab.classList.add('active');
-        }
+            <!-- Structure Section -->
+            <div id="structure" class="content-subsection active">
+                <h2 id="structure-title">Mô Tả và Giải Thích Cơ Cấu Tổ Chức</h2>
+                
+                <div class="info-box info-primary">
+                    <h3>💡 Khái Niệm Nhà Nước Pháp Quyền</h3>
+                    <p>Nhà nước pháp quyền được hiểu một cách chung nhất là một kiểu nhà nước thường tôn pháp luật, hướng tới các vấn đề phúc lợi cho mọi người, tạo điều kiện cho cá nhân được tự do, bình đẳng và phát huy hết năng lực của mình.</p>
+                </div>
 
-        function becomeAdmin() {
-            if(isLocalMode || !db) return alert("Hệ thống đang ở chế độ Offline.");
-            const password = prompt("Nhập mật mã xác thực quyền Admin:");
-            if (password === "EPR301") {
-                isAdmin = true;
-                db.ref('gameState/status').set("WAIT");
-                document.getElementById('admin-controls').style.display = 'block';
-                alert("Xác thực Admin thành công!");
-            } else {
-                alert("Mật mã sai!");
-            }
-        }
+                <div class="structure-diagram">
+                    <div class="org-chart">
+                        <div class="org-level-1">
+                            <div class="org-box primary">Nhân Dân</div>
+                        </div>
+                        <div class="org-arrow">↓</div>
+                        <div class="org-level-2">
+                            <div class="org-box secondary">Quốc Hội<br>(Cơ quan quyền lực cao nhất)</div>
+                        </div>
+                        <div class="org-arrow">↓</div>
+                        <div class="org-level-3">
+                            <div class="org-box tertiary">
+                                <div>Lập Pháp</div>
+                            </div>
+                            <div class="org-box tertiary">
+                                <div>Hành Pháp</div>
+                            </div>
+                            <div class="org-box tertiary">
+                                <div>Tư Pháp</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        // CHẾ ĐỘ CHƠI TEST OFFLINE AN TOÀN TUYỆT ĐỐI
-        function joinOfflineMode() {
-            const input = document.getElementById('username-input').value.trim();
-            myName = input ? input : "Người chơi thử";
-            isLocalMode = true;
+                <div class="principle-cards">
+                    <div class="principle-card">
+                        <h4>Nguyên Tắc 1: Quyền Lực Thống Nhất</h4>
+                        <ul>
+                            <li>Quyền lực nhà nước không chia cắt mà là một thể thống nhất</li>
+                            <li>Tất cả quyền lực nhà nước thuộc về nhân dân</li>
+                            <li>Nhân dân thực hiện quyền lực thông qua dân chủ trực tiếp và dân chủ đại diện</li>
+                            <li>Quốc hội là cơ quan quyền lực nhà nước cao nhất</li>
+                            <li>Sự thống nhất đảm bảo mọi hoạt động hướng tới phục vụ lợi ích nhân dân</li>
+                        </ul>
+                    </div>
 
-            document.getElementById('my-name-display').innerText = myName;
-            document.getElementById('screen-join').style.display = 'none';
-            document.getElementById('screen-lobby').style.display = 'block';
-            
-            document.getElementById('mode-badge').innerText = "⚡ CHẾ ĐỘ TEST OFFLINE";
-            document.getElementById('player-count').innerText = "3";
-            
-            const listUl = document.getElementById('lobby-list');
-            listUl.innerHTML = `<li>${myName} (Bạn)</li><li>Nguyễn Văn A (Bot)</li><li>Trần Thị B (Bot)</li>`;
-            
-            document.getElementById('local-start-box').style.display = 'block';
-        }
+                    <div class="principle-card">
+                        <h4>Nguyên Tắc 2: Phân Công, Phối Hợp, Kiểm Soát</h4>
+                        <ul>
+                            <li>Dù quyền lực là thống nhất, bộ máy nhà nước được tổ chức theo nguyên tắc phân công</li>
+                            <li>Các cơ quan lập pháp, hành pháp và tư pháp được giao nhiệm vụ cụ thể</li>
+                            <li>Ba nhánh quyền lực phải phối hợp chặt chẽ để thực hiện các nhiệm vụ chung</li>
+                            <li>Kiểm soát quyền lực giữa các cơ quan để ngăn ngừa lạm quyền và tham nhũng</li>
+                            <li>Nhân dân giám sát thông qua phương châm "Dân biết, dân bàn, dân làm, dân kiểm tra"</li>
+                        </ul>
+                    </div>
 
-        // CHẾ ĐỘ ONLINE (ĐÃ FIX LỖI CRASH RENDER)
-        function joinLobby() {
-            const input = document.getElementById('username-input').value.trim();
-            if (!input) return alert("Vui lòng điền biệt danh!");
-            myName = input;
-            myId = "user_" + Math.random().toString(36).substr(2, 9);
+                    <div class="principle-card">
+                        <h4>Nguyên Tắc 3: Tập Trung Dân Chủ</h4>
+                        <ul>
+                            <li>Bộ máy nhà nước vận hành theo nguyên tắc tập trung dân chủ</li>
+                            <li>Kết hợp sự tập trung thống nhất với phân công, phân cấp rõ ràng</li>
+                            <li>Bảo đảm sự chỉ đạo thống nhất từ Trung ương</li>
+                            <li>Phát huy tính chủ động của các địa phương</li>
+                            <li>Giữ vững sự ổn định và thống nhất của toàn bộ hệ thống chính trị</li>
+                        </ul>
+                    </div>
 
-            if (!db) {
-                alert("Không kết nối được Firebase, tự động chuyển sang chế độ Offline để bảo vệ!");
-                joinOfflineMode();
-                return;
-            }
+                    <div class="principle-card">
+                        <h4>Nguyên Tắc 4: Thượng Tôn Hiến Pháp & Pháp Luật</h4>
+                        <ul>
+                            <li>Nhà nước được tổ chức và hoạt động trên cơ sở Hiến pháp và pháp luật</li>
+                            <li>Pháp luật được đặt ở vị trí tối cao để điều chỉnh quan hệ xã hội</li>
+                            <li>Mọi cơ quan nhà nước, cán bộ, công chức phải nghiêm chỉnh chấp hành pháp luật</li>
+                            <li>Bảo đảm tính nghiêm minh của kỷ cương xã hội</li>
+                        </ul>
+                    </div>
+                </div>
 
-            db.ref('lobby/' + myId).set({ name: myName, score: 0 })
-            .then(() => {
-                document.getElementById('my-name-display').innerText = myName;
-                document.getElementById('screen-join').style.display = 'none';
-                document.getElementById('screen-lobby').style.display = 'block';
-                db.ref('lobby/' + myId).onDisconnect().remove();
+                <div class="info-box info-success">
+                    <h3>✓ Kết Luận</h3>
+                    <p>Mô hình này là sự kết hợp giữa việc tập trung quyền lực vào tay nhân dân với việc chuyên môn hóa hoạt động quản lý thông qua sự phân công quyền lực, dưới sự lãnh đạo duy nhất của Đảng Cộng sản Việt Nam để đảm bảo định hướng xã hội chủ nghĩa.</p>
+                </div>
+            </div>
 
-                pollingInterval = setInterval(() => {
-                    db.ref('lobby').once('value').then(snapshot => {
-                        const listUl = document.getElementById('lobby-list');
-                        listUl.innerHTML = "";
-                        let count = 0;
-                        snapshot.forEach(child => {
-                            const li = document.createElement('li');
-                            li.innerText = child.val().name;
-                            listUl.appendChild(li);
-                            count++;
-                        });
-                        document.getElementById('player-count').innerText = count;
-                    });
+            <!-- Principles Section -->
+            <div id="principles" class="content-subsection">
+                <h2>Nguyên Tắc Vận Hành</h2>
+                <p>Các nguyên tắc này đã được trình bày chi tiết ở phần Cơ Cấu Tổ Chức.</p>
+                <div class="interactive-section">
+                    <h3>🎯 Test Kiến Thức</h3>
+                    <div class="question-box">
+                        <p><strong>Câu hỏi:</strong> Theo nguyên tắc quyền lực nhà nước là thống nhất, tất cả quyền lực nhà nước thuộc về ai?</p>
+                        <div class="answer-options">
+                            <button class="answer-btn" onclick="checkAnswer(true)">A. Nhân dân ✓</button>
+                            <button class="answer-btn" onclick="checkAnswer(false)">B. Quốc hội</button>
+                            <button class="answer-btn" onclick="checkAnswer(false)">C. Chính phủ</button>
+                            <button class="answer-btn" onclick="checkAnswer(false)">D. Đảng Cộng sản</button>
+                        </div>
+                        <div id="answerFeedback"></div>
+                    </div>
+                </div>
+            </div>
 
-                    db.ref('gameState/status').once('value').then(snapshot => {
-                        if (snapshot.val() === "START") {
-                            clearInterval(pollingInterval);
-                            enterGame();
-                        }
-                    });
-                }, 1000);
-            })
-            .catch(err => {
-                console.log("Firebase block, fallback to offline.");
-                joinOfflineMode();
-            });
-        }
+            <!-- Leadership Section -->
+            <div id="leadership" class="content-subsection">
+                <h2>Vai Trò Lãnh Đạo Của Đảng Cộng Sản Việt Nam</h2>
+                
+                <div class="info-box info-warning">
+                    <h3>⚠️ Đặc Trưng Cơ Bản</h3>
+                    <p>Đảng Cộng sản Việt Nam là lực lượng lãnh đạo Nhà nước và xã hội. Đây là một trong những đặc trưng cơ bản của mô hình Nhà nước pháp quyền xã hội chủ nghĩa ở nước ta, được khẳng định trong Điều 4 Hiến pháp năm 2013.</p>
+                </div>
 
-        function startGameByAdmin() {
-            if(db) db.ref('gameState/status').set("START");
-        }
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('tab1', this)">Vai Trò Lãnh Đạo</button>
+                    <button class="tab-btn" onclick="switchTab('tab2', this)">Định Hướng Phát Triển</button>
+                    <button class="tab-btn" onclick="switchTab('tab3', this)">Kiểm Soát & Giám Sát</button>
+                    <button class="tab-btn" onclick="switchTab('tab4', this)">Liên Hệ Nhân Dân</button>
+                </div>
 
-        function enterGame() {
-            if(pollingInterval) clearInterval(pollingInterval);
-            document.getElementById('screen-lobby').style.display = 'none';
-            document.getElementById('screen-game').style.display = 'block';
-            showQuestion();
-            startTimer();
-        }
+                <div id="tab1" class="tab-content active">
+                    <h3>Đảng là Lực Lượng Lãnh Đạo Toàn Diện</h3>
+                    <ul class="content-list">
+                        <li>Nhà nước được xây dựng và hoạt động dưới sự lãnh đạo của Đảng</li>
+                        <li>Sự lãnh đạo bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân</li>
+                        <li>Gắn bó chặt chẽ với nhân dân và dân tộc, kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội</li>
+                    </ul>
+                </div>
 
-        function startTimer() {
-            countdownInterval = setInterval(() => {
-                totalTime--;
-                document.getElementById('game-timer').innerText = totalTime;
-                if (totalTime <= 0) {
-                    clearInterval(countdownInterval);
-                    endGame();
-                }
-            }, 1000);
-        }
+                <div id="tab2" class="tab-content">
+                    <h3>Đảng Định Hướng Đường Lối & Chiến Lược</h3>
+                    <ul class="content-list">
+                        <li>Đảng giữ vai trò hoạch định đường lối, chủ trương và định hướng phát triển đất nước</li>
+                        <li>Thông qua các nghị quyết, chiến lược và chủ trương lớn</li>
+                        <li>Quốc hội, Chính phủ, Tòa án cụ thể hóa thành chính sách, pháp luật và chương trình hành động</li>
+                    </ul>
+                </div>
 
-        function showQuestion() {
-            if (currentQuestionIndex >= quizData.length) {
-                currentQuestionIndex = 0; 
-            }
-            const currentQuiz = quizData[currentQuestionIndex];
-            document.getElementById('question-text').innerText = `Câu hỏi: ${currentQuiz.q}`;
-            
-            const container = document.getElementById('options-container');
-            container.innerHTML = "";
-            
-            currentQuiz.a.forEach((option, index) => {
-                const btn = document.createElement('button');
-                btn.className = "option-btn";
-                btn.innerText = option;
-                btn.onclick = () => checkAnswer(index);
-                container.appendChild(btn);
-            });
-        }
+                <div id="tab3" class="tab-content">
+                    <h3>Đảng Lãnh Đạo Nhưng Không Thay Thế Chức Năng</h3>
+                    <ul class="content-list">
+                        <li>Các cơ quan nhà nước vẫn thực hiện đầy đủ quyền lập pháp, hành pháp và tư pháp</li>
+                        <li>Đảng không làm thay chức năng quản lý của Nhà nước</li>
+                        <li>Đảng thực hiện kiểm tra, giám sát và chính đoàn Đảng để phòng chống tham nhũng, lãng phí</li>
+                        <li>Này là cơ sở để xây dựng Nhà nước trong sạch, vững mạnh</li>
+                    </ul>
+                </div>
 
-        function checkAnswer(selectedIndex) {
-            const currentQuiz = quizData[currentQuestionIndex];
-            if (selectedIndex === currentQuiz.c) {
-                score += 100;
-                document.getElementById('game-score').innerText = score;
-                if(!isLocalMode && db) db.ref('lobby/' + myId).update({ score: score });
-                currentQuestionIndex++;
-                showQuestion();
-            } else {
-                score = Math.max(0, score - 50);
-                document.getElementById('game-score').innerText = score;
-                if(!isLocalMode && db) db.ref('lobby/' + myId).update({ score: score });
-                triggerPenalty();
-            }
-        }
+                <div id="tab4" class="tab-content">
+                    <h3>Đảng Gắn Bó Mật Thiết Với Nhân Dân</h3>
+                    <ul class="content-list">
+                        <li>Đảng xác định nguyên tắc "lấy dân làm gốc"</li>
+                        <li>Mọi chủ trương đều hướng tới lợi ích của nhân dân</li>
+                        <li>Thông qua sự lãnh đạo, Nhà nước hoàn thiện cơ chế cho nhân dân thực hiện quyền làm chủ</li>
+                        <li>Bảo đảm Nhà nước thực sự là Nhà nước của Nhân dân, do Nhân dân và vì Nhân dân</li>
+                    </ul>
+                </div>
+            </div>
 
-        function triggerPenalty() {
-            const penaltyScreen = document.getElementById('penalty-screen');
-            const penaltyTimer = document.getElementById('penalty-timer');
-            penaltyScreen.style.display = 'flex';
-            
-            let timeLeft = 5;
-            penaltyTimer.innerText = timeLeft;
-            
-            const interval = setInterval(() => {
-                timeLeft--;
-                penaltyTimer.innerText = timeLeft;
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    penaltyScreen.style.display = 'none';
-                    currentQuestionIndex++;
-                    showQuestion();
-                }
-            }, 1000);
-        }
+            <!-- Accountability Section -->
+            <div id="accountability" class="content-subsection">
+                <h2>Trách Nhiệm Giải Trình Của Các Cơ Quan Nhà Nước</h2>
+                
+                <div class="info-box info-primary">
+                    <h3>📌 Cơ Sở Hình Thành</h3>
+                    <p>Để hiểu vì sao các cơ quan nhà nước phải giải trình trước Nhân dân, trước hết cần xuất phát từ bản chất của Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam. Theo Hiến pháp năm 2013, tất cả quyền lực nhà nước thuộc về Nhân dân. Điều này có nghĩa là các cơ quan nhà nước không phải là chủ thể nắm giữ quyền lực cho riêng mình mà là những cơ quan được Nhân dân trao quyền để thay mặt Nhân dân quản lý và điều hành đất nước.</p>
+                </div>
 
-        function endGame() {
-            document.getElementById('screen-game').style.display = 'none';
-            document.getElementById('screen-rank').style.display = 'block';
+                <div class="two-column-layout">
+                    <div class="column">
+                        <h3>🏛️ Quốc Hội</h3>
+                        <div class="responsibility-card">
+                            <h4>Trách Nhiệm Giải Trình:</h4>
+                            <ul>
+                                <li>Đại biểu Quốc hội thường xuyên tiếp xúc cử tri</li>
+                                <li>Lắng nghe ý kiến, kiến nghị của Nhân dân</li>
+                                <li>Phản ánh những ý kiến vào hoạt động lập pháp, giám sát</li>
+                                <li>Chịu trách nhiệm trước cử tri và báo cáo việc thực hiện nhiệm vụ</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            if (isLocalMode) {
-                const tbody = document.getElementById('rank-tbody');
-                tbody.innerHTML = `
-                    <tr><td>1</td><td>${myName} (Bạn)</td><td><strong>${score}đ</strong></td></tr>
-                    <tr><td>2</td><td>Nguyễn Văn A</td><td><strong>500đ</strong></td></tr>
-                    <tr><td>3</td><td>Trần Thị B</td><td><strong>300đ</strong></td></tr>
-                `;
-            } else if(db) {
-                db.ref('lobby').once('value', snapshot => {
-                    const players = [];
-                    snapshot.forEach(child => { players.push(child.val()); });
-                    players.sort((a, b) => b.score - a.score);
+                    <div class="column">
+                        <h3>⚙️ Chính Phủ</h3>
+                        <div class="responsibility-card">
+                            <h4>Trách Nhiệm Giải Trình:</h4>
+                            <ul>
+                                <li>Công khai, minh bạch các chính sách, chương trình</li>
+                                <li>Giải thích cho người dân các quyết định hành chính</li>
+                                <li>Tiếp nhận và xử lý phản ánh, kiến nghị của công dân</li>
+                                <li>Chịu sự giám sát của Quốc hội, Hội đồng nhân dân và Nhân dân</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
-                    const tbody = document.getElementById('rank-tbody');
-                    tbody.innerHTML = "";
-                    players.forEach((player, index) => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `<td>${index + 1}</td><td>${player.name}</td><td><strong>${player.score}đ</strong></td>`;
-                        tbody.appendChild(row);
-                    });
-                });
-            }
-        }
-    </script>
+                <div class="two-column-layout">
+                    <div class="column">
+                        <h3>⚖️ Tòa Án & Viện Kiểm Sát</h3>
+                        <div class="responsibility-card">
+                            <h4>Trách Nhiệm Giải Trình:</h4>
+                            <ul>
+                                <li>Bảo đảm mọi hoạt động xét xử, truy tố tuân thủ Hiến pháp và pháp luật</li>
+                                <li>Công khai bản án, quyết định theo quy định</li>
+                                <li>Giải thích rõ căn cứ pháp lý của các phán quyết</li>
+                                <li>Bảo vệ công lý, quyền con người và quyền công dân</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <h3>👥 Cộng Đồng Giám Sát</h3>
+                        <div class="responsibility-card">
+                            <h4>Hình Thức Giám Sát:</h4>
+                            <ul>
+                                <li>Bầu cử Quốc hội và Hội đồng nhân dân</li>
+                                <li>Tiếp xúc cử tri với các đại biểu</li>
+                                <li>Khiếu nại, tố cáo, phản biện xã hội</li>
+                                <li>Giám sát của Mặt trận Tổ quốc và các tổ chức chính trị - xã hội</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box info-success">
+                    <h3>💡 Mối Liên Hệ Hai Chiều</h3>
+                    <p>Mối quan hệ giữa các cơ quan nhà nước và Nhân dân là một mối quan hệ hai chiều: Nhân dân trao quyền cho Nhà nước thực hiện quản lý xã hội, còn Nhà nước phải phục vụ Nhân dân, chịu sự giám sát của Nhân dân và có trách nhiệm giải trình trước Nhân dân. Đây chính là một trong những biểu hiện quan trọng nhất của bản chất Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam - Nhà nước của Nhân dân, do Nhân dân và vì Nhân dân.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Section -->
+        <section id="game" class="section">
+            <div class="game-container">
+                <!-- Waiting Room -->
+                <div id="waitingRoom" class="game-screen">
+                    <div class="waiting-content">
+                        <h1>🎮 Mini Game Đảng Bộ</h1>
+                        <p>Kiểm tra kiến thức về Nhà nước pháp quyền XHCN Việt Nam</p>
+                        
+                        <div class="waiting-info">
+                            <div class="info-item">
+                                <span class="info-label">Chế độ:</span>
+                                <span class="info-value">Thi Đấu Trực Tuyến</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Thời gian:</span>
+                                <span class="info-value">2 phút</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Câu hỏi:</span>
+                                <span class="info-value">50 câu</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Số người chơi:</span>
+                                <span class="info-value" id="playerCount">1</span>
+                            </div>
+                        </div>
+
+                        <div class="player-list">
+                            <h3>Danh Sách Người Chơi:</h3>
+                            <div id="playersList" class="players-grid"></div>
+                        </div>
+
+                        <div class="waiting-buttons">
+                            <input type="text" id="playerName" placeholder="Nhập tên của bạn" class="player-input" maxlength="20">
+                            <button class="btn btn-primary" onclick="joinGame()">Tham Gia Game</button>
+                        </div>
+
+                        <div id="adminStartButton" class="admin-start-hidden">
+                            <button class="btn btn-danger btn-large" onclick="startGame()">🎮 Bắt Đầu Trò Chơi (Admin)</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Screen -->
+                <div id="gameScreen" class="game-screen hidden">
+                    <div class="game-header">
+                        <div class="game-timer">
+                            <span id="timer">2:00</span>
+                        </div>
+                        <div class="game-score">
+                            <span>Câu: <span id="questionNum">0</span>/50</span>
+                            <span>Điểm: <span id="score">0</span></span>
+                        </div>
+                        <div class="game-player">
+                            <span id="gamePlayerName"></span>
+                        </div>
+                    </div>
+
+                    <div class="game-content">
+                        <div id="questionContainer" class="question-container"></div>
+                        <div id="penaltyContainer" class="penalty-container hidden">
+                            <div class="penalty-message">
+                                <h3>❌ Trả Lời Sai!</h3>
+                                <p>Bị phạt chờ <span id="penaltyTime">5</span>s</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Screen -->
+                <div id="resultsScreen" class="game-screen hidden">
+                    <div class="results-content">
+                        <h1>🏆 Kết Quả Trò Chơi</h1>
+                        
+                        <div class="results-summary">
+                            <div class="summary-item">
+                                <span class="label">Tên Người Chơi:</span>
+                                <span class="value" id="resultPlayerName"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Tổng Điểm:</span>
+                                <span class="value" id="resultScore"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Câu Đúng:</span>
+                                <span class="value" id="resultCorrect"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Câu Sai:</span>
+                                <span class="value" id="resultWrong"></span>
+                            </div>
+                        </div>
+
+                        <h2>🥇 Bảng Xếp Hạng</h2>
+                        <table class="ranking-table">
+                            <thead>
+                                <tr>
+                                    <th>Hạng</th>
+                                    <th>Tên Người Chơi</th>
+                                    <th>Điểm</th>
+                                    <th>Đúng/Sai</th>
+                                </tr>
+                            </thead>
+                            <tbody id="rankingTableBody">
+                            </tbody>
+                        </table>
+
+                        <div class="results-buttons">
+                            <button class="btn btn-primary" onclick="resetGame()">🔄 Chơi Lại</button>
+                            <button class="btn btn-secondary" onclick="navigateTo('home')">🏠 Quay Về Trang Chủ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Nhà Nước Pháp Quyền XHCN Việt Nam - MLN131 Nhóm 3</p>
+            <p>Để học tập và kiểm tra kiến thức</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
