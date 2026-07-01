@@ -400,7 +400,7 @@
             <h2>Vai trò lãnh đạo của Đảng Cộng sản Việt Nam đối với Nhà nước</h2>
             
             <h3>1. Lực lượng lãnh đạo Nhà nước và xã hội</h3>
-            <p>Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam được xây dựng và hoạt động dưới sự lãnh đạo của Đảng Cộng sản Việt Nam[cite: 2]. Đây là một trong những đặc trưng cơ bản của mô hình Nhà nước pháp quyền xã hội chủ nghĩa ở nước ta, được khẳng định trong Điều 4 Hiến pháp năm 2013[cite: 2]. Sự lãnh đạo của Đảng bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân, đồng thời gắn bó chặt chẽ with nhân dân và dân tộc, kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội[cite: 2].</p>
+            <p>Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam được xây dựng và hoạt động dưới sự lãnh đạo của Đảng Cộng sản Việt Nam[cite: 2]. Đây là một trong những đặc trưng cơ bản của mô hình Nhà nước pháp quyền xã hội chủ nghĩa ở nước ta, được khẳng định trong Điều 4 Hiến pháp năm 2013[cite: 2]. Sự lãnh đạo của Đảng bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân, đồng thời gắn bó chặt chẽ với nhân dân và dân tộc, kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội[cite: 2].</p>
 
             <h3>2. Định hướng đường lối và chiến lược phát triển đất nước</h3>
             <p>Đảng giữ vai trò hoạch định đường lối, chủ trương và định hướng phát triển đất nước trên các lĩnh vực kinh tế, chính trị, văn hóa, xã hội, quốc phòng và đối ngoại[cite: 2]. Thông qua các nghị quyết, chiến lược và chủ trương lớn, Đảng định hướng cho quá trình xây dựng, hoàn thiện hệ thống pháp luật và tổ chức hoạt động của bộ máy nhà nước[cite: 2]. Trên cơ sở đó, Quốc hội, Chính phủ, Tòa án và các cơ quan nhà nước cụ thể hóa thành chính sách, pháp luật và chương trình hành động để thực hiện trong thực tiễn[cite: 2].</p>
@@ -450,7 +450,7 @@
             </div>
         </div>
 
-        <!-- TAB MINIGAME TIME-REAL (CƠ CHẾ ĐỒNG BỘ MỚI FIX TRIỆT ĐỂ) -->
+        <!-- TAB MINIGAME TIME-REAL -->
         <div id="minigame" class="content-section">
             <div id="screen-join" class="game-card">
                 <h2>Đấu Trường Tri Thức Realtime</h2>
@@ -471,7 +471,8 @@
                     <h4 style="margin-top:0; color:var(--secondary);">Danh sách học sinh online (<span id="player-count">0</span>):</h4>
                     <ul id="lobby-list"></ul>
                 </div>
-                <!-- Nút chỉ admin nhìn thấy -->
+                
+                <!-- Nút chỉ hiện khi xác thực Admin thành công -->
                 <div id="admin-controls" style="display:none; margin-top: 20px; border-top: 2px dashed #cbd5e1; padding-top: 20px;">
                     <p style="color: var(--primary); font-weight: bold; margin-top:0;">QUYỀN QUẢN TRÒ ADMIN ACTIVE</p>
                     <button class="btn btn-admin" style="font-size: 16px; padding: 12px 30px;" onclick="startGameByAdmin()">PHÁT LỆNH BẮT ĐẦU TOÀN LỚP</button>
@@ -549,12 +550,13 @@
             if(targetTab) targetTab.classList.add('active');
         }
 
+        // ĐÃ FIX LỖI CHÍ MẠNG: Loại bỏ cú pháp thừa .style.style
         function becomeAdmin() {
             const password = prompt("Nhập mật mã xác thực quyền Admin điều phối:");
             if (password === "EPR301") {
                 isAdmin = true;
-                document.getElementById('admin-controls').style.style.display = 'block';
-                alert("Xác thực thành công! Đã mở quyền Admin.");
+                document.getElementById('admin-controls').style.display = 'block';
+                alert("Xác thực thành công! Đã hiển thị bảng điều khiển Quản trò (Phát lệnh bắt đầu).");
             } else {
                 alert("Mật mã không chính xác!");
             }
@@ -576,7 +578,7 @@
             db.ref('lobby/' + myId).set({ name: myName, score: 0 });
             db.ref('lobby/' + myId).onDisconnect().remove();
 
-            // Lắng nghe danh sách realtime
+            // Lắng nghe danh sách học sinh online realtime
             db.ref('lobby').on('value', snapshot => {
                 const listUl = document.getElementById('lobby-list');
                 listUl.innerHTML = "";
@@ -590,7 +592,7 @@
                 document.getElementById('player-count').innerText = count;
             });
 
-            // SỬA LỖI ĐỒNG BỘ: Dùng `.on('value')` thu thập trạng thái chính xác nhất từ Database máy chủ
+            // Đồng bộ trạng thái bắt đầu game từ Firebase
             db.ref('gameState/status').on('value', snapshot => {
                 if (snapshot.val() === "START") {
                     enterGame();
@@ -599,12 +601,11 @@
         }
 
         function startGameByAdmin() {
-            // Đẩy lệnh START lên thẳng máy chủ Firebase để kích hoạt toàn bộ máy trạm
+            // Đẩy lệnh START lên thẳng máy chủ Firebase để kích hoạt toàn bộ máy trạm cùng lúc
             db.ref('gameState').set({ status: "START" });
         }
 
         function enterGame() {
-            // Ngắt kết nối lắng nghe kênh cũ để tối ưu dữ liệu mạng
             db.ref('gameState/status').off();
             db.ref('lobby').off();
 
@@ -628,7 +629,7 @@
 
         function showQuestion() {
             if (currentQuestionIndex >= quizData.length) {
-                currentQuestionIndex = 0; // Quay vòng câu hỏi nếu hết câu
+                currentQuestionIndex = 0; 
             }
             const currentQuiz = quizData[currentQuestionIndex];
             document.getElementById('question-text').innerText = `Câu hỏi: ${currentQuiz.q}`;
