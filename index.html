@@ -403,7 +403,7 @@
             <p>Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam được xây dựng và hoạt động dưới sự lãnh đạo của Đảng Cộng sản Việt Nam. Đây là một trong những đặc trưng cơ bản của mô hình Nhà nước pháp quyền xã hội chủ nghĩa ở nước ta, được khẳng định trong Điều 4 Hiến pháp năm 2013. Sự lãnh đạo của Đảng bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân, đồng thời gắn bó chặt chẽ với nhân dân và dân tộc, kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội.</p>
 
             <h3>2. Định hướng đường lối và chiến lược phát triển đất nước</h3>
-            <p>Đảng giữ vai trò hoạch định đường lối, chủ trương và định hướng phát triển đất nước trên các lĩnh vực kinh tế, chính trị, văn hóa, xã hội, quốc phòng và đối ngoại. Thông qua các nghị quyết, chiến lược và chủ trương lớn, Đảng định hướng cho quá trình xây dựng, hoàn thiện hệ thống pháp luật và tổ chức hoạt động của bộ máy nhà nước. Trên cơ sở đó, Quốc hội, Chính phủ, Tòa án và các cơ quan nhà nước cụ thể hóa thành chính sách, pháp luật và chương trình hành động để thực hiện trong thực tiễn.</p>
+            <p>Đảng giữ vai trò hoạch định đường lối, chủ trương và định hướng phát triển đất nước trên các lĩnh vực kinh tế, chính trị, văn hóa, xã hội, quốc phòng và đối ngoại. Thông qua các nghị quyết, chiến lược và chủ trương lớn, ĐẢng định hướng cho quá trình xây dựng, hoàn thiện hệ thống pháp luật và tổ chức hoạt động của bộ máy nhà nước. Trên cơ sở đó, Quốc hội, Chính phủ, Tòa án và các cơ quan nhà nước cụ thể hóa thành chính sách, pháp luật và chương trình hành động để thực hiện trong thực tiễn.</p>
 
             <h3>3. Đảng lãnh đạo nhưng không thay thế chức năng của Nhà nước</h3>
             <p>Trong Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam, Đảng thực hiện vai trò lãnh đạo bằng cương lĩnh, đường lối, chủ trương và công tác cán bộ, chứ không làm thay chức năng quản lý của Nhà nước. Các cơ quan nhà nước vẫn thực hiện đầy đủ quyền lập pháp, hành pháp và tư pháp theo quy định của Hiến pháp và pháp luật. Điều này vừa bảo đảm vai trò lãnh đạo của Đảng, vừa phát huy tính chủ động, trách nhiệm và hiệu quả hoạt động của bộ máy nhà nước.</p>
@@ -554,8 +554,10 @@
             const password = prompt("Nhập mật mã xác thực quyền Admin điều phối:");
             if (password === "EPR301") {
                 isAdmin = true;
+                // Khi bật Admin, tự động xóa sạch dữ liệu game cũ để tránh kẹt trạng thái cũ
+                db.ref('gameState/status').set("WAIT");
                 document.getElementById('admin-controls').style.display = 'block';
-                alert("Xác thực thành công! Đã hiển thị bảng điều khiển Quản trò (Phát lệnh bắt đầu).");
+                alert("Xác thực thành công! Đã reset trạng thái phòng chờ về WAIT.");
             } else {
                 alert("Mật mã không chính xác!");
             }
@@ -571,11 +573,7 @@
             document.getElementById('screen-join').style.display = 'none';
             document.getElementById('screen-lobby').style.display = 'block';
 
-            // Nếu là người vào đầu tiên, đặt trạng thái phòng về WAIT
-            db.ref('gameState/status').transaction((currentStatus) => {
-                return currentStatus === "START" ? currentStatus : "WAIT";
-            });
-
+            // GIẢI PHÁP SỬA LỖI: Chỉ đẩy data user lên, TUYỆT ĐỐI không can thiệp reset gameState/status tại đây nữa
             db.ref('lobby/' + myId).set({ name: myName, score: 0 });
             db.ref('lobby/' + myId).onDisconnect().remove();
 
@@ -593,7 +591,7 @@
                 document.getElementById('player-count').innerText = count;
             });
 
-            // SỬA LỖI ĐỒNG BỘ: Luôn lắng nghe sự thay đổi của trạng thái game liên tục
+            // Luôn luôn lắng nghe biến status từ máy chủ độc lập
             db.ref('gameState/status').on('value', snapshot => {
                 if (snapshot.val() === "START") {
                     enterGame();
@@ -602,12 +600,12 @@
         }
 
         function startGameByAdmin() {
-            // Đẩy lệnh START lên Firebase để toàn bộ máy trạm nhảy vào game cùng lúc
+            // Đẩy lệnh START đồng bộ
             db.ref('gameState/status').set("START");
         }
 
         function enterGame() {
-            // Tắt lắng nghe để tránh bị gọi lại lần nữa vô cớ
+            // Hủy lắng nghe trạng thái cũ để tránh trùng lặp loop
             db.ref('gameState/status').off();
             db.ref('lobby').off();
 
@@ -688,7 +686,6 @@
             document.getElementById('screen-game').style.display = 'none';
             document.getElementById('screen-rank').style.display = 'block';
 
-            // Reset trạng thái máy chủ về trạng thái chờ cho lượt chơi tiếp theo
             if (isAdmin) {
                 db.ref('gameState/status').set("WAIT");
             }
