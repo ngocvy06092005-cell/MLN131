@@ -199,6 +199,8 @@
         .btn:hover { background-color: #132b66; }
         .btn-admin { background-color: var(--primary); }
         .btn-admin:hover { background-color: var(--primary-dark); }
+        .btn-success { background-color: #10b981; }
+        .btn-success:hover { background-color: #059669; }
 
         .input-field {
             padding: 10px;
@@ -388,10 +390,12 @@
         <div id="minigame" class="content-section">
             <div id="screen-join" class="game-card">
                 <h2>Đấu Trường Tri Thức Realtime</h2>
-                <p style="color:#64748b;">Nhập biệt danh để chuẩn bị tham gia trận đấu kiểm tra kiến thức.</p>
-                <div id="status-badge" style="margin-bottom: 15px; font-size: 13px; font-weight: bold; color: #2563eb;">Hệ thống sẵn sàng</div>
+                <p style="color:#64748b;">Nhập biệt danh để tham gia trận đấu kiểm tra kiến thức.</p>
                 <input type="text" id="username-input" class="input-field" placeholder="Nhập tên của bạn..." maxlength="15"><br>
-                <button class="btn" onclick="joinLobby()">Vào Phòng Chờ</button>
+                
+                <button class="btn btn-success" onclick="joinOfflineMode()">⚡ CHƠI OFFLINE (TEST NHANH)</button>
+                <button class="btn" onclick="joinLobby()">Vào Phòng Chờ Online</button>
+
                 <div style="margin-top: 25px; font-size: 13px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 15px;">
                     Dành cho Người quản trò điều phối trận đấu: <br>
                     <button class="btn btn-admin" style="padding: 6px 12px; font-size: 11px; margin-top: 5px;" onclick="becomeAdmin()">Kích hoạt quyền Admin</button>
@@ -401,14 +405,14 @@
             <div id="screen-lobby" class="game-card" style="display:none;">
                 <h2>PHÒNG CHỜ TRÒ CHƠI</h2>
                 <p>Chào mừng <strong id="my-name-display" style="color:var(--primary)"></strong>! Đang đợi lệnh bắt đầu từ hệ thống...</p>
-                <div id="mode-warning" style="font-size:12px; color:#b45309; margin-bottom: 10px; font-weight: bold;"></div>
+                <div id="mode-badge" style="font-size:12px; color:#2563eb; font-weight:bold; margin-bottom:10px;">Chế độ trực tuyến</div>
                 <div style="background: #f8fafc; padding: 20px; border-radius: 6px; border: 1px solid #cbd5e1;">
                     <h4 style="margin-top:0; color:var(--secondary);">Danh sách học sinh online (<span id="player-count">0</span>):</h4>
                     <ul id="lobby-list"></ul>
                 </div>
                 
                 <div id="local-start-box" style="margin-top: 15px; display:none;">
-                    <button class="btn btn-admin" onclick="enterGame()">Bấm để Tự bắt đầu chơi ngay (Chế độ Local)</button>
+                    <button class="btn btn-success" style="font-size:16px;" onclick="enterGame()">BẮT ĐẦU CHƠI NGAY</button>
                 </div>
 
                 <div id="admin-controls" style="display:none; margin-top: 20px; border-top: 2px dashed #cbd5e1; padding-top: 20px;">
@@ -453,17 +457,15 @@
     </div>
 
     <script>
-        // CẤU HÌNH HỆ THỐNG CƠ SỞ DỮ LIỆU
         const firebaseConfig = { databaseURL: "https://realtime-quiz-fpt-default-rtdb.asia-southeast1.firebasedatabase.app/" };
         
         let db = null;
-        let isLocalMode = false; // Chế độ dự phòng bảo vệ an toàn khi lỗi kết nối mạng
+        let isLocalMode = false;
 
         try {
             firebase.initializeApp(firebaseConfig);
             db = firebase.database();
         } catch(e) {
-            console.log("Firebase Init error, switching to safe mode.");
             isLocalMode = true;
         }
 
@@ -473,7 +475,7 @@
             { q: "Cơ quan nào được xác định là cơ quan quyền lực nhà nước cao nhất tại Việt Nam?", a: ["Quốc hội", "Chính phủ", "Tòa án nhân dân tối cao", "Viện kiểm sát nhân dân tối cao"], c: 0 },
             { q: "Phương châm nào thể hiện sự giám sát của nhân dân đối với cơ chế kiểm soát quyền lực?", a: ["Dân biết, dân bàn, dân làm, dân kiểm tra", "Làm theo năng lực, hưởng theo nhu cầu", "Thượng tôn pháp luật, kỷ cương nghiêm minh", "Tập trung dân chủ, phân cấp rõ ràng"], c: 0 },
             { q: "Đặc trưng cơ bản về vai trò của Đảng được khẳng định tại Điều mấy của Hiến pháp 2013?", a: ["Điều 1", "Điều 2", "Điều 4", "Điều 10"], c: 2 },
-            { q: "Đั่ง Cộng sản Việt Nam thực hiện vai trò lãnh đạo Nhà nước bằng cách nào?", a: ["Trực tiếp làm thay chức năng hành chính", "Bằng cương lĩnh, đường lối, chủ trương và công tác cán bộ", "Tự ban hành các quyết định hành chính cấp tỉnh", "Thay mặt Tòa án xét xử các vụ án"], c: 1 },
+            { q: "Đảng Cộng sản Việt Nam thực hiện vai trò lãnh đạo Nhà nước bằng cách nào?", a: ["Trực tiếp làm thay chức năng hành chính", "Bằng cương lĩnh, đường lối, chủ trương và công tác cán bộ", "Tự ban hành các quyết định hành chính cấp tỉnh", "Thay mặt Tòa án xét xử các vụ án"], c: 1 },
             { q: "Mối liên hệ giữa các cơ quan nhà nước và Nhân dân được khẳng định là mối quan hệ gì?", a: ["Mối quan hệ một chiều từ trên xuống", "Mối quan hệ độc lập không can thiệp", "Mối quan hệ hai chiều phụ thuộc lẫn nhau", "Mối quan hệ tạm thời theo nhiệm kỳ"], c: 2 },
             { q: "Trách nhiệm giải trình của các cơ quan tư pháp (Tòa án, Viện kiểm sát) thể hiện qua việc gì?", a: ["Bảo đảm xét xử, truy tố tuân thủ Hiến pháp và công khai bản án", "Tự quyết định ngân sách quốc gia", "Thay đổi nội dung Hiến pháp khi cần", "Tổ chức bầu cử Đại biểu Quốc hội"], c: 0 }
         ];
@@ -496,55 +498,58 @@
         }
 
         function becomeAdmin() {
-            if(isLocalMode || !db) return alert("Hệ thống đang chạy chế độ Offline, không cần quyền Admin.");
+            if(isLocalMode || !db) return alert("Hệ thống đang ở chế độ Offline.");
             const password = prompt("Nhập mật mã xác thực quyền Admin:");
             if (password === "EPR301") {
                 isAdmin = true;
-                db.ref('gameState/status').set("WAIT").then(() => {
-                    document.getElementById('admin-controls').style.display = 'block';
-                    alert("Xác thực thành công! Đã đồng bộ trạng thái phòng chờ.");
-                });
+                db.ref('gameState/status').set("WAIT");
+                document.getElementById('admin-controls').style.display = 'block';
+                alert("Xác thực Admin thành công!");
             } else {
-                alert("Mật mã không chính xác!");
+                alert("Mật mã sai!");
             }
         }
 
-        // HÀM CHUYỂN GIAO MÀN HÌNH CHỜ (Tách riêng biệt xử lý lỗi nghẽn trình duyệt)
-        function enterLobbyUI() {
+        // CHẾ ĐỘ CHƠI TEST OFFLINE AN TOÀN TUYỆT ĐỐI
+        function joinOfflineMode() {
+            const input = document.getElementById('username-input').value.trim();
+            myName = input ? input : "Người chơi thử";
+            isLocalMode = true;
+
             document.getElementById('my-name-display').innerText = myName;
             document.getElementById('screen-join').style.display = 'none';
             document.getElementById('screen-lobby').style.display = 'block';
-
-            if (isLocalMode) {
-                document.getElementById('mode-warning').innerText = "⚠️ Đang chạy Chế độ Dự phòng An toàn (Offline Mode)";
-                document.getElementById('player-count').innerText = "1";
-                const listUl = document.getElementById('lobby-list');
-                listUl.innerHTML = `<li>${myName} (Bạn)</li>`;
-                document.getElementById('local-start-box').style.display = 'block';
-            }
+            
+            document.getElementById('mode-badge').innerText = "⚡ CHẾ ĐỘ TEST OFFLINE";
+            document.getElementById('player-count').innerText = "3";
+            
+            const listUl = document.getElementById('lobby-list');
+            listUl.innerHTML = `<li>${myName} (Bạn)</li><li>Nguyễn Văn A (Bot)</li><li>Trần Thị B (Bot)</li>`;
+            
+            document.getElementById('local-start-box').style.display = 'block';
         }
 
+        // CHẾ ĐỘ ONLINE (ĐÃ FIX LỖI CRASH RENDER)
         function joinLobby() {
             const input = document.getElementById('username-input').value.trim();
             if (!input) return alert("Vui lòng điền biệt danh!");
             myName = input;
             myId = "user_" + Math.random().toString(36).substr(2, 9);
 
-            if (isLocalMode || !db) {
-                isLocalMode = true;
-                enterLobbyUI();
+            if (!db) {
+                alert("Không kết nối được Firebase, tự động chuyển sang chế độ Offline để bảo vệ!");
+                joinOfflineMode();
                 return;
             }
 
-            // Gửi thông tin lên Server độc lập
             db.ref('lobby/' + myId).set({ name: myName, score: 0 })
             .then(() => {
-                enterLobbyUI();
+                document.getElementById('my-name-display').innerText = myName;
+                document.getElementById('screen-join').style.display = 'none';
+                document.getElementById('screen-lobby').style.display = 'block';
                 db.ref('lobby/' + myId).onDisconnect().remove();
 
-                // Chỉ khi kết nối thành công hoàn toàn mới chạy Vòng quét cập nhật (Bảo vệ luồng code)
                 pollingInterval = setInterval(() => {
-                    // Quét danh sách
                     db.ref('lobby').once('value').then(snapshot => {
                         const listUl = document.getElementById('lobby-list');
                         listUl.innerHTML = "";
@@ -556,9 +561,8 @@
                             count++;
                         });
                         document.getElementById('player-count').innerText = count;
-                    }).catch(e => console.log("Đợi đồng bộ..."));
+                    });
 
-                    // Quét lệnh bắt đầu
                     db.ref('gameState/status').once('value').then(snapshot => {
                         if (snapshot.val() === "START") {
                             clearInterval(pollingInterval);
@@ -567,11 +571,9 @@
                     });
                 }, 1000);
             })
-            .catch(error => {
-                // Tự động kích hoạt cơ chế Local Mode dự phòng thông minh nếu Firebase bị lỗi phân quyền
-                console.log("Firebase write failed, fallback to local.");
-                isLocalMode = true;
-                enterLobbyUI();
+            .catch(err => {
+                console.log("Firebase block, fallback to offline.");
+                joinOfflineMode();
             });
         }
 
@@ -657,19 +659,17 @@
             document.getElementById('screen-game').style.display = 'none';
             document.getElementById('screen-rank').style.display = 'block';
 
-            if (!isLocalMode && isAdmin && db) {
-                db.ref('gameState/status').set("WAIT");
-            }
-
             if (isLocalMode) {
                 const tbody = document.getElementById('rank-tbody');
-                tbody.innerHTML = `<tr><td>1</td><td>${myName} (Bạn)</td><td><strong>${score}đ</strong></td></tr>`;
+                tbody.innerHTML = `
+                    <tr><td>1</td><td>${myName} (Bạn)</td><td><strong>${score}đ</strong></td></tr>
+                    <tr><td>2</td><td>Nguyễn Văn A</td><td><strong>500đ</strong></td></tr>
+                    <tr><td>3</td><td>Trần Thị B</td><td><strong>300đ</strong></td></tr>
+                `;
             } else if(db) {
                 db.ref('lobby').once('value', snapshot => {
                     const players = [];
-                    snapshot.forEach(child => {
-                        players.push(child.val());
-                    });
+                    snapshot.forEach(child => { players.push(child.val()); });
                     players.sort((a, b) => b.score - a.score);
 
                     const tbody = document.getElementById('rank-tbody');
