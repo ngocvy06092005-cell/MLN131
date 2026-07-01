@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm hiểu Nhà nước Pháp quyền XHCN Việt Nam</title>
+    <style>
+        :root {
+            --primary-color: #cc2a2a;
+            --primary-dark: #991d1d;
+            --secondary-color: #1e3a8a;
+            --accent-color: #d97706;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #ffffff;
+            --card-bg: #ffffff;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            color: var(--text-light);
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle, rgba(217,119,6,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        nav {
+            background-color: var(--secondary-color);
+            sticky: top;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 15px 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fcd34d;
+            border-bottom: 3px solid #fcd34d;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-panel {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            border-left: 5px solid var(--primary-color);
+            display: none;
+        }
+
+        .section-panel.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--primary-color);
+            margin: 20px 0 10px 0;
+            font-size: 1.3rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Thẻ đồ họa nội dung phong phú */
+        .highlight-box {
+            background-color: #fef2f2;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* SVG Graphics đại diện */
+        .svg-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Quiz Styling */
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #e2e8f0;
+            border-radius: 10px;
+            height: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--accent-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .option-item {
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-item:hover:not(.disabled) {
+            background-color: #eff6ff;
+            border-color: #bfdbfe;
+        }
+
+        .option-item.selected {
+            border-color: var(--secondary-color);
+            background-color: #eff6ff;
+        }
+
+        .option-item.correct {
+            background-color: #d1fae5;
+            border-color: var(--success);
+            color: #065f46;
+        }
+
+        .option-item.wrong {
+            background-color: #fee2e2;
+            border-color: var(--danger);
+            color: #991b1b;
+        }
+
+        .option-item.disabled {
+            cursor: not-allowed;
+        }
+
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: #64748b;
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #475569;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-panel {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #1d4ed8 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px auto;
+            box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.3);
+        }
+
+        .score-num {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .rank-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .rank-A { color: var(--success); }
+        .rank-B { color: var(--accent-color); }
+        .rank-C { color: var(--primary-color); }
+
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-container {
+                flex-direction: column;
+            }
+            nav a {
+                text-align: center;
+                padding: 10px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            header h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Nhà nước Pháp quyền XHCN Việt Nam</h1>
+        <p>Hệ thống tri thức nền tảng về cơ cấu tổ chức, nguyên tắc vận hành và nền tảng pháp lý vững chắc của đất nước</p>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-link active" onclick="switchTab(event, 'mo-hinh')">🏛️ Mô hình & Vận hành</a>
+            <a href="#" class="nav-link" onclick="switchTab(event, 'vai-tro-dang')">⭐ Vai trò lãnh đạo của Đảng</a>
+            <a href="#" class="nav-link" onclick="switchTab(event, 'moi-lien-he')">👥 Nhà nước & Nhân dân</a>
+            <a href="#" class="nav-link" onclick="switchTab(event, 'tro-choi')">🎮 Trò chơi Thử thách</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- TAB 1: MÔ HÌNH VÀ VẬN HÀNH -->
+        <section id="mo-hinh" class="section-panel active">
+            <h2>Mô hình Nhà nước Pháp quyền XHCN Việt Nam</h2>
+            <p>Nhà nước pháp quyền được hiểu một cách chung nhất là một kiểu nhà nước thượng tôn pháp luật, hướng tới các vấn đề phúc lợi cho mọi người, tạo điều kiện cho cá nhân được tự do, bình đẳng và phát huy hết năng lực của mình. Trong hoạt động của nhà nước pháp quyền, các cơ quan nhà nước được phân quyền rõ ràng và được mọi người chấp nhận trên nguyên tắc bình đẳng của các thế hệ, giai cấp và tầng lớp xã hội.</p>
+            
+            <div class="svg-container">
+                <svg width="200" height="120" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="80" width="180" height="30" rx="5" fill="#1e3a8a"/>
+                    <polygon points="100,10 30,50 170,50" fill="#cc2a2a"/>
+                    <rect x="40" y="50" width="15" height="30" fill="#d97706"/>
+                    <rect x="70" y="50" width="15" height="30" fill="#d97706"/>
+                    <rect x="100" y="50" width="15" height="30" fill="#d97706"/>
+                    <rect x="140" y="50" width="15" height="30" fill="#d97706"/>
+                    <text x="100" y="102" fill="white" font-size="12" font-weight="bold" text-anchor="middle">THƯỢNG TÔN PHÁP LUẬT</text>
+                </svg>
+            </div>
+
+            <h3>1. Nguyên tắc quyền lực nhà nước là thống nhất</h3>
+            <p>Quyền lực nhà nước tại Việt Nam không chia cắt mà là một thể thống nhất, <strong>tất cả quyền lực nhà nước đều thuộc về nhân dân</strong>. Nhân dân thực hiện quyền lực này thông qua các hình thức dân chủ trực tiếp và dân chủ đại diện, trong đó Quốc hội được xác định là cơ quan quyền lực nhà nước cao nhất. Sự thống nhất này đảm bảo rằng mọi hoạt động của bộ máy nhà nước đều hướng tới mục tiêu phục vụ lợi ích của nhân dân, do nhân dân lao động làm chủ.</p>
+
+            <h3>2. Sự phân công, phối hợp và kiểm soát quyền lực</h3>
+            <p>Dù quyền lực là thống nhất, nhưng bộ máy nhà nước được tổ chức theo nguyên tắc có sự phân công rành mạch, phối hợp chặt chẽ và tăng cường kiểm soát giữa các cơ quan nhà nước trong việc thực hiện ba quyền cơ bản:</p>
+            
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-title"><span style="color:var(--primary-color)">⚖️</span> Lập pháp</div>
+                    <p>Giao cho Quốc hội thực hiện nhiệm vụ làm luật, xây dựng khung pháp lý tối cao định hình xã hội, bảo đảm tính chuyên nghiệp.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span style="color:var(--accent-color)">🏢</span> Hành pháp</div>
+                    <p>Giao cho Chính phủ quản lý, điều hành và thực thi pháp luật vào đời sống kinh tế - xã hội một cách hiệu quả.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title"><span style="color:var(--secondary-color)">👨‍⚖️</span> Tư pháp</div>
+                    <p>Giao cho Tòa án nhân dân và Viện kiểm sát nhân dân thực hiện quyền xét xử, bảo vệ công lý và pháp luật nghiêm minh.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                "Kiểm soát quyền lực là đặc điểm cốt yếu để ngăn ngừa việc lạm dụng quyền lực và các tệ nạn như tham nhũng, lãng phí. Nhà nước thiết lập các cơ chế kiểm soát lẫn nhau, đồng thời chịu sự giám sát của nhân dân thông qua phương châm: Dân biết, dân bàn, dân làm, dân kiểm tra."
+            </div>
+
+            <h3>3. Nguyên tắc tập trung dân chủ & Thượng tôn pháp luật</h3>
+            <ul>
+                <li><strong>Tập trung dân chủ:</strong> Đòi hỏi bộ máy nhà nước vừa bảo đảm tính tập trung thống nhất quyền lực của Trung ương, vừa phát huy tính chủ động, sáng tạo của các địa phương một cách hợp lý.</li>
+                <li><strong>Thượng tôn Hiến pháp và Pháp luật:</strong> Pháp luật đặt ở vị trí tối thượng. Mọi cơ quan nhà nước, cán bộ, công chức, viên chức và công dân đều phải nghiêm chỉnh chấp hành pháp luật.</li>
+            </ul>
+        </section>
+
+        <!-- TAB 2: VAI TRÒ LÃNH ĐẠO CỦA ĐẢNG -->
+        <section id="vai-tro-dang" class="section-panel">
+            <h2>Vai trò lãnh đạo của Đảng Cộng sản Việt Nam</h2>
+            <p>Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam được xây dựng và hoạt động dưới sự lãnh đạo của Đảng Cộng sản Việt Nam. Đây là đặc trưng cơ bản nhất được khẳng định trang trọng tại <strong>Điều 4 Hiến pháp năm 2013</strong>. Sự lãnh đạo của Đảng bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân, gắn bó mật thiết với nhân dân và kiên định mục tiêu chủ nghĩa xã hội.</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-title">⭐ Hoạch định đường lối</div>
+                    <p>Đảng giữ vai trò định hướng chiến lược trên các lĩnh vực kinh tế, chính trị, văn hóa, xã hội. Trên cơ sở nghị quyết của Đảng, các cơ quan Nhà nước sẽ cụ thể hóa thành luật, chính sách.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🛡️ Lãnh đạo không thay thế</div>
+                    <p>Đảng lãnh đạo bằng cương lĩnh, đường lối và công tác cán bộ, chứ không làm thay chức năng hành chính của Nhà nước. Các cơ quan lập pháp, hành pháp, tư pháp vẫn chủ động vận hành đúng thẩm quyền.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title">🔍 Kiểm tra & Giám sát</div>
+                    <p>Đảng thường xuyên chỉnh đốn, kiên quyết đấu tranh phòng, chống tham nhũng, lãng phí. Đây là cơ sở then chốt để xây dựng một bộ máy Nhà nước thực sự trong sạch, vững mạnh.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="border-left-color: var(--accent-color); background-color: #fffbeb;">
+                Đảng xác định nguyên tắc "lấy dân làm gốc", mọi chủ trương đường lối đều hướng tới lợi ích của nhân dân. Thông qua sự lãnh đạo của Đảng, Nhà nước không ngừng hoàn thiện cơ chế để nhân dân thực hiện quyền làm chủ thực tế.
+            </div>
+        </section>
+
+        <!-- TAB 3: MỐI LIÊN HỆ VÀ TRÁCH NHIỆM GIẢI TRÌNH -->
+        <section id="moi-lien-he" class="section-panel">
+            <h2>Mối liên hệ & Trách nhiệm giải trình trước Nhân dân</h2>
+            <p>Theo Hiến pháp năm 2013, tất cả quyền lực nhà nước thuộc về Nhân dân. Các cơ quan nhà nước không phải chủ thể nắm giữ quyền lực tuyệt đối mà được Nhân dân ủy quyền, giao phó trách nhiệm quản lý đất nước. Do đó, mối liên hệ và trách nhiệm giải trình trở thành thước đo quan trọng hàng đầu.</p>
+
+            <h3>1. Sợi dây liên hệ hai chiều vững chắc</h3>
+            <p>Mối liên hệ được hình thành từ việc Nhân dân bầu cử ra Quốc hội và Hội đồng nhân dân các cấp. Nhà nước duy trì mối liên hệ này thường xuyên qua các kênh:</p>
+            <ul>
+                <li>Tiếp xúc cử tri định kỳ của đại biểu dân cử.</li>
+                <li>Lấy ý kiến rộng rãi của Nhân dân trước khi ban hành chính sách lớn.</li>
+                <li>Công tác tiếp công dân, tiếp nhận và giải quyết triệt để khiếu nại, tố cáo.</li>
+            </ul>
+
+            <h3>2. Nội hàm của Trách nhiệm giải trình (Accountability)</h3>
+            <p>Giải trình không đơn thuần là báo cáo số liệu hay thành tích. Bản chất của giải trình là <strong>báo cáo, giải thích rõ căn cứ, lý do, tính hiệu quả của các quyết định</strong> và chịu trách nhiệm hoàn toàn về quyền lực được giao.</p>
+
+            <div class="grid-3" style="grid-template-columns: 1fr 1fr;">
+                <div class="card">
+                    <div class="card-title" style="color: var(--primary-color);">🏢 Hệ thống hành chính (Chính phủ)</div>
+                    <p>Công khai, minh bạch các chương trình, dự án kinh tế, phân bổ ngân sách quốc gia; giải thích rõ ràng các quyết định hành chính ảnh hưởng đến đời sống và sẵn sàng tiếp thu phản ánh của công dân.</p>
+                </div>
+                <div class="card">
+                    <div class="card-title" style="color: var(--secondary-color);">👨‍⚖️ Hệ thống tư pháp (Tòa án & Viện kiểm sát)</div>
+                    <p>Công khai các bản án, quyết định theo đúng quy định; giải thích thuyết phục căn cứ pháp lý của phán quyết để bảo vệ công lý, quyền con người, củng cố niềm tin tuyệt đối của người dân.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: TRÒ CHƠI TRẮC NGHIỆM -->
+        <section id="tro-choi" class="section-panel">
+            <h2>🎮 Trò chơi: Thử thách Kiến thức Pháp quyền</h2>
+            <p>Hãy cùng kiểm tra và củng cố lại các kiến thức pháp lý với bộ câu hỏi 50 câu trắc nghiệm khách quan chuẩn hóa dưới đây!</p>
+
+            <!-- Giao diện bắt đầu game -->
+            <div id="quiz-start-screen" style="text-align: center; padding: 30px;">
+                <div style="font-size: 5rem; margin-bottom: 20px;">📝</div>
+                <h3>Sẵn sàng tham gia thử thách?</h3>
+                <p>Bộ câu hỏi gồm 50 câu bao quát toàn bộ kiến thức về cấu trúc nhà nước, vai trò của Đảng và quyền làm chủ của Nhân dân.</p>
+                <button class="btn-primary" onclick="startQuiz()" style="font-size: 1.2rem; padding: 15px 40px; margin-top: 15px; border-radius: 30px; box-shadow: 0 4px 10px rgba(204,42,42,0.3);">Bắt đầu Chơi ngay</button>
+            </div>
+
+            <!-- Giao diện đang chơi -->
+            <div id="quiz-play-screen" style="display: none;">
+                <div class="quiz-header">
+                    <div>Câu hỏi: <span id="current-q-num">1</span> / 50</div>
+                    <div>Điểm hiện tại: <span id="current-score" style="color: var(--accent-color);">0</span></div>
+                </div>
+
+                <div class="progress-container">
+                    <div id="quiz-progress" class="progress-bar"></div>
+                </div>
+
+                <div class="question-card">
+                    <div id="question-text" class="question-text">Nội dung câu hỏi sẽ hiển thị ở đây?</div>
+                    <ul class="options-list" id="options-container">
+                        <!-- Đáp án sinh tự động bằng JS -->
+                    </ul>
+                </div>
+
+                <div class="quiz-controls">
+                    <button class="btn-secondary" id="btn-prev" onclick="prevQuestion()" disabled>Câu trước</button>
+                    <button class="btn-primary" id="btn-next" onclick="nextQuestion()" disabled>Câu tiếp theo</button>
+                </div>
+            </div>
+
+            <!-- Giao diện kết quả -->
+            <div id="quiz-result-screen" class="result-panel" style="display: none;">
+                <h3>📊 Kết quả Thử thách của bạn</h3>
+                <div class="score-circle">
+                    <span class="score-num" id="final-score">0</span>
+                    <span class="score-label">Điểm số</span>
+                </div>
+                <div class="rank-text" id="quiz-rank">Xếp loại: Xuất sắc</div>
+                <p id="result-summary" style="text-align: center; font-size: 1.1rem; margin-bottom: 30px;">Bạn đã trả lời đúng 0 / 50 câu hỏi.</p>
+                <button class="btn-primary" onclick="restartQuiz()">Chơi lại từ đầu</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Trang web Học tập & Tương tác Pháp luật Đại chúng</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.7;">Xây dựng dựa trên nền tảng Hiến pháp nước Cộng hòa Xã hội Chủ nghĩa Việt Nam</p>
+    </footer>
+
+    <script>
+        // DỮ LIỆU BỘ 50 CÂU HỎI TRẮC NGHIỆM ĐẦY ĐỦ
+        const quizData = [
+            { q: "Theo nguyên tắc quyền lực nhà nước là thống nhất, tất cả quyền lực nhà nước thuộc về ai?", a: ["Nhân dân", "Quốc hội", "Chính phủ", "Đạng Cộng sản Việt Nam"], c: 0 },
+            { q: "Cơ quan nào được xác định là cơ quan quyền lực nhà nước cao nhất?", a: ["Chính phủ", "Quốc hội", "Tòa án nhân dân tối cao", "Chủ tịch nước"], c: 1 },
+            { q: "Việc phân công giữa lập pháp, hành pháp và tư pháp chủ yếu nhằm mục đích nào?", a: ["Tách biệt hoàn toàn quyền lực nhà nước", "Trao quyền ngang nhau cho các địa phương", "Giảm vai trò của Quốc hội", "Bảo đảm tính chuyên môn hóa và hiệu quả trong quản lý xã hội"], c: 3 },
+            { q: "Đặc điểm nào phản ánh đúng mô hình quyền lực nhà nước ở Việt Nam?", a: ["Tam quyền phân lập tuyệt đối", "Phân chia quyền lực theo chế độ liên bang", "Quyền lực thống nhất nhưng có sự phân công, phối hợp và kiểm soát", "Quyền lập pháp giữ vai trò chi phối hoàn toàn"], c: 2 },
+            { q: "Kiểm soát quyền lực giữa các cơ quan nhà nước nhằm mục tiêu chủ yếu nào?", a: ["Giảm quyền của Quốc hội", "Hạn chế quyền tham gia của nhân dân", "Tăng quyền cho Chính phủ", "Ngăn ngừa lạm quyền, tham nhũng và lãng phí"], c: 3 },
+            { q: "Phương châm nào thể hiện sự giám sát của nhân dân đối với hoạt động của Nhà nước?", a: ["Dân giàu, nước mạnh", "Dân biết, dân bàn, dân làm, dân kiểm tra", "Sống và làm việc theo Hiến pháp", "Nhà nước quản lý, nhân dân phục tùng"], c: 1 },
+            { q: "Nguyên tắc tập trung dân chủ yêu cầu điều gì?", a: ["Chỉ phân cấp cho địa phương", "Chỉ tập trung quyền lực ở Trung ương", "Kết hợp sự thống nhất chỉ đạo với phân công, phân cấp hợp lý", "Các địa phương hoàn toàn độc lập"], c: 2 },
+            { q: "Nguyên tắc tập trung dân chủ giúp đạt được điều gì?", a: ["Loại bỏ hoàn toàn vai trò địa phương", "Địa phương quyết định mọi chính sách", "Chỉ tăng quyền cho Trung ương", "Phát huy tính chủ động của địa phương nhưng vẫn giữ sự thống nhất"], c: 3 },
+            { q: "Thượng tôn Hiến pháp và pháp luật có nghĩa là", a: ["Hiến pháp và pháp luật giữ vị trí tối cao trong tổ chức và hoạt động của Nhà nước.", "Chỉ cơ quan tư pháp phải tuân thủ pháp luật.", "Chỉ công dân phải chấp hành pháp luật.", "Pháp luật chỉ điều chỉnh quan hệ hành chính."], c: 0 },
+            { q: "Đối tượng nào bắt buộc phải nghiêm chỉnh chấp hành pháp luật?", a: ["Chỉ cán bộ lãnh đạo", "Chỉ công dân", "Cơ quan nhà nước, cán bộ, công chức, viên chức", "Chỉ cơ quan lập pháp"], c: 2 },
+            { q: "Đặc trưng cơ bản của Nhà nước pháp quyền XHCN Việt Nam là", a: ["Nhà nước hoạt động độc lập với Đảng.", "Đảng Cộng sản Việt Nam lãnh đạo Nhà nước và xã hội.", "Quốc hội lãnh đạo Đảng.", "Chính phủ giữ vai trò lãnh đạo toàn diện."], c: 1 },
+            { q: "Vai trò lãnh đạo của Đảng đối với Nhà nước được khẳng định trong", a: ["Bộ luật Dân sự", "Luật Tổ chức Chính phủ", "Hiến pháp năm 2013", "Luật Cán bộ, công chức"], c: 2 },
+            { q: "Đảng lãnh đạo Nhà nước chủ yếu thông qua", a: ["Ban hành bản án", "Trực tiếp điều hành Chính phủ", "Cương lĩnh, đường lối, chủ trương và công tác cán bộ", "Thay thế hoạt động của Quốc hội"], c: 2 },
+            { q: "Sau khi Đảng đề ra chủ trương, cơ quan nhà nước sẽ", a: ["Không cần triển khai.", "Cụ thể hóa thành chính sách và pháp luật.", "Chỉ áp dụng trong lĩnh vực kinh tế.", "Chỉ áp dụng ở Trung ương."], c: 1 },
+            { q: "Trong Nhà nước pháp quyền XHCN Việt Nam, Đảng", a: ["Trực tiếp xét xử các vụ án.", "Ban hành mọi quyết định hành chính.", "Thực hiện toàn bộ quyền lập pháp.", "Không làm thay chức năng quản lý của Nhà nước."], c: 3 },
+            { q: "Nội dung nào phản ánh đúng vai trò của Đảng trong xây dựng đội ngũ cán bộ?", a: ["Chỉ tuyển dụng cán bộ địa phương", "Xây dựng đội ngũ có phẩm chất chính trị, đạo đức và năng lực chuyên môn", "Chỉ đào tạo cán bộ tư pháp", "Chỉ kiểm tra cán bộ Quốc hội"], c: 1 },
+            { q: "Đảng thực hiện kiểm tra, giám sát nhằm", a: ["Tăng quyền lực tuyệt đối cho các cơ quan", "Giảm vai trò pháp luật", "Phòng, chống tham nhũng, lãng phí và suy thoái", "Hạn chế quyền giám sát của nhân dân"], c: 2 },
+            { q: "Nguyên tắc \"lấy dân làm gốc\" thể hiện điều gì?", a: ["Đảng chỉ phục vụ cán bộ", "Mọi chủ trương đều hướng tới lợi ích của nhân dân", "Nhân dân không tham gia quản lý xã hội", "Nhà nước không chịu giám sát"], c: 1 },
+            { q: "Theo Hiến pháp năm 2013, quyền lực nhà nước có nguồn gốc từ", a: ["Quốc hội", "Đảng", "Chính phủ", "Nhân dân"], c: 3 },
+            { q: "Trách nhiệm giải trình của cơ quan nhà nước trước nhân dân xuất phát từ", a: ["Quyền lực do nhân dân trao", "Quyền lực do Chính phủ trao", "Quyền lực của Đảng", "Quyền lực của Quốc hội"], c: 0 },
+            { q: "Giải trình không chỉ là báo cáo kết quả mà còn là", a: ["Trình bày thành tích", "Giải thích căn cứ, lý do và hiệu quả của quyết định", "Công bố ngân sách", "Ban hành pháp luật mới"], c: 1 },
+            { q: "Đại biểu Quốc hội chịu trách nhiệm trực tiếp trước", a: ["Chính phủ", "Đảng", "Cử tri", "Chủ tịch nước"], c: 2 },
+            { q: "Chính phủ thực hiện trách nhiệm giải trình thông qua hoạt động nào dưới đây?", a: ["Chỉ tiếp xúc cử tri", "Chỉ xét xử vụ án", "Chỉ ban hành luật", "Công khai chính sách, ngân sách và tiếp nhận phản ánh của công dân"], c: 3 },
+            { q: "Hoạt động nào sau đây góp phần tăng cường niềm tin của nhân dân đối với cơ quan tư pháp?", a: ["Công khai bản án, quyết định theo quy định và giải thích căn cứ pháp lý", "Chỉ xét xử kín", "Không công khai quyết định", "Chỉ giải trình với Quốc hội"], c: 0 },
+            { q: "Mối quan hệ giữa Nhà nước và Nhân dân trong Nhà nước pháp quyền XHCN Việt Nam được hiểu đúng là", a: ["Nhà nước trao quyền cho Nhân dân.", "Nhà nước quản lý, Nhân dân không giám sát.", "Nhân dân trao quyền cho Nhà nước; Nhà nước phục vụ, chịu giám sát và giải trình trước Nhân dân.", "Cơ quan nhà nước độc lập với Nhân dân."], c: 2 },
+            { q: "Điểm khác biệt của mô hình Nhà nước pháp quyền XHCN Việt Nam so với mô hình tam quyền phân lập là gì?", a: ["Không có sự phân công giữa các cơ quan nhà nước.", "Quyền lực nhà nước là thống nhất nhưng có sự phân công, phối hợp và kiểm soát giữa các cơ quan.", "Chỉ có cơ quan lập pháp mới thực hiện quyền lực nhà nước.", "Ba nhánh quyền lực hoàn toàn độc lập và đối trọng tuyệt đối."], c: 1 },
+            { q: "Theo nguyên tắc quyền lực nhà nước là thống nhất, Quốc hội được xác định là", a: ["Cơ quan đại diện duy nhất của Đảng.", "Cơ quan hành pháp cao nhất.", "Cơ quan quyền lực nhà nước cao nhất.", "Cơ quan kiểm sát tối cao."], c: 2 },
+            { q: "Nếu cơ quan nhà nước không chịu sự kiểm soát quyền lực, nguy cơ nào dễ xảy ra nhất?", a: ["Tăng cường hiệu quả phối hợp.", "Phân cấp hợp lý hơn.", "Đẩy mạnh dân chủ trực tiếp.", "Lạm quyền, tham nhũng và lãng phí."], c: 3 },
+            { q: "Nguyên tắc tập trung dân chủ yêu cầu sự kết hợp giữa", a: ["Tập trung thống nhất với phân công, phân cấp phù hợp.", "Phân quyền tuyệt đối cho địa phương.", "Tập trung toàn bộ quyền lực cho Chính phủ.", "Hoạt động độc lập của từng cơ quan."], c: 0 },
+            { q: "Nội dung nào không phù hợp với nguyên tắc thượng tôn Hiến pháp và pháp luật?", a: ["Pháp luật giữ vị trí tối cao trong điều chỉnh quan hệ xã hội.", "Mọi cơ quan nhà nước đều phải tuân thủ pháp luật.", "Công chức được phép linh hoạt không tuân thủ pháp luật trong trường hợp đặc biệt.", "Hoạt động của Nhà nước phải dựa trên Hiến pháp."], c: 2 },
+            { q: "Đảng Cộng sản Việt Nam giữ vai trò lãnh đạo Nhà nước chủ yếu nhằm", a: ["Thực hiện thay chức năng quản lý hành chính.", "Giữ vững định hướng xã hội chủ nghĩa trong quá trình phát triển đất nước.", "Trực tiếp ban hành toàn bộ văn bản quy phạm pháp luật.", "Thực hiện chức năng xét xử."], c: 1 },
+            { q: "Đảng lãnh đạo nhưng không thay thế chức năng của Nhà nước có nghĩa là", a: ["Đảng trực tiếp điều hành mọi hoạt động của Chính phủ.", "Đảng ban hành mọi bản án của Tòa án.", "Các cơ quan nhà nước vẫn thực hiện đầy đủ quyền lập pháp, hành pháp và tư pháp theo Hiến pháp và pháp luật.", "Quốc hội hoạt động dưới sự điều hành của Chính phủ."], c: 2 },
+            { q: "Sau khi Đảng ban hành chủ trương, nhiệm vụ của Quốc hội và Chính phủ là", a: ["Chỉ tuyên truyền chủ trương.", "Chờ địa phương thực hiện.", "Xin ý kiến Tòa án trước khi triển khai.", "Cụ thể hóa thành pháp luật, chính sách và chương trình hành động."], c: 3 },
+            { q: "Đảng thực hiện vai trò lãnh đạo thông qua nội dung nào sau đây?", a: ["Cương lĩnh, đường lối, chủ trương và công tác cán bộ.", "Trực tiếp ký kết hợp đồng kinh tế.", "Điều hành xét xử các vụ án.", "Ban hành giấy phép hành chính."], c: 0 },
+            { q: "Việc Đảng tăng cường kiểm tra, giám sát nhằm mục tiêu quan trọng nhất là", a: ["Mở rộng quyền lực của cơ quan lập pháp.", "Xây dựng Nhà nước trong sạch, vững mạnh và hoạt động hiệu quả.", "Giảm vai trò của nhân dân trong giám sát.", "Tăng quyền độc lập tuyệt đối của từng cơ quan."], c: 1 },
+            { q: "Nội dung nào phản ánh đúng nguyên tắc \"lấy dân làm gốc\"?", a: ["Chỉ tiếp thu ý kiến của cán bộ.", "Mọi chính sách đều ưu tiên phát triển kinh tế.", "Mọi chủ trương đều hướng tới lợi ích của nhân dân và bảo đảm quyền làm chủ của nhân dân.", "Nhà nước quyết định thay cho nhân dân trong mọi trường hợp."], c: 2 },
+            { q: "Theo Hiến pháp năm 2013, cơ sở làm phát sinh trách nhiệm giải trình của các cơ quan nhà nước là", a: ["Được Quốc hội phân công nhiệm vụ.", "Được Chính phủ giao quyền.", "Được Đảng chỉ đạo.", "Quyền lực nhà nước thuộc về Nhân dân."], c: 3 },
+            { q: "Mối liên hệ giữa Nhà nước và Nhân dân được hình thành trước hết thông qua", a: ["Bầu cử Quốc hội và Hội đồng nhân dân các cấp.", "Các cuộc họp của Chính phủ.", "Hoạt động của Tòa án.", "Quyết định của Chủ tịch nước."], c: 0 },
+            { q: "Hoạt động nào dưới đây không phải là hình thức duy trì mối liên hệ thường xuyên giữa Nhà nước và Nhân dân?", a: [" Tiếp xúc cử tri.", "Lấy ý kiến Nhân dân.", "Tiếp công dân.", "Ban hành bản án bí mật không công khai."], c: 3 },
+            { q: "Bản chất của trách nhiệm giải trình là", a: ["Chỉ công khai kết quả công việc.", "Báo cáo, giải thích căn cứ và chịu trách nhiệm về việc sử dụng quyền lực được giao.", "Chỉ công khai ngân sách.", "Chỉ trả lời khi có khiếu nại."], c: 1 },
+            { q: "Đại biểu Quốc hội thực hiện trách nhiệm giải trình trước cử tri thông qua", a: ["Tiếp xúc cử tri và báo cáo việc thực hiện nhiệm vụ.", "Ban hành nghị định.", "Điều hành hoạt động của Chính phủ.", "Kiểm sát hoạt động xét xử."], c: 0 },
+            { q: "Trách nhiệm giải trình của Chính phủ được thể hiện rõ nhất ở việc", a: ["Chỉ chịu trách nhiệm trước Quốc hội.", "Công khai chính sách, ngân sách, giải thích quyết định hành chính và tiếp nhận phản ánh của công dân.", "Chỉ công khai các dự án đầu tư.", "Chỉ tiếp công dân khi có yêu cầu đặc biệt."], c: 1 },
+            { q: "Hoạt động nào là biểu hiện của trách nhiệm giải trình trong lĩnh vực tư pháp?", a: ["Ban hành nghị quyết.", "Quyết định ngân sách.", "Công khai bản án, giải thích căn cứ pháp lý của phán quyết.", "Tiếp xúc cử tri định kỳ."], c: 2 },
+            { q: "Một trong những mục tiêu của việc công khai bản án theo quy định là", a: ["Tăng quyền lực cho Tòa án.", "Hạn chế quyền tiếp cận thông tin.", "Giảm vai trò của pháp luật.", "Tăng cường niềm tin của Nhân dân vào hoạt động tư pháp."], c: 3 },
+            { q: "Nhân dân có thể giám sát hoạt động của cơ quan nhà nước thông qua hình thức nào sau đây?", a: ["Bầu cử, khiếu nại, tố cáo, phản biện xã hội.", "Chỉ thông qua mạng xã hội.", "Chỉ thông qua báo chí.", "Chỉ thông qua đại biểu Quốc hội."], c: 0 },
+            { q: "Vai trò của Mặt trận Tổ quốc Việt Nam trong mối quan hệ giữa Nhà nước và Nhân dân là", a: ["Thực hiện quyền xét xử.", "Tham gia giám sát và phản biện xã hội.", "Ban hành luật.", "Điều hành hoạt động của Chính phủ."], c: 1 },
+            { q: "Mối quan hệ giữa Nhân dân và Nhà nước trong Nhà nước pháp quyền XHCN Việt Nam là", a: ["Quan hệ một chiều từ Nhà nước đến Nhân dân.", "Quan hệ trong đó Nhà nước quyết định hoàn toàn.", "Quan hệ hai chiều: Nhân dân trao quyền, Nhà nước phục vụ và chịu giám sát.", "Quan hệ giữa Đảng và Chính phủ."], c: 2 },
+            { q: "Nội dung nào sau đây phản ánh đầy đủ nhất trách nhiệm của Nhà nước sau khi được Nhân dân trao quyền?", a: ["Chỉ thực hiện quản lý xã hội.", "Chỉ ban hành pháp luật.", "Chỉ chịu trách nhiệm trước Quốc hội.", "Phục vụ Nhân dân, chịu sự giám sát và có trách nhiệm giải trình trước Nhân dân."], c: 3 },
+            { q: "Yếu tố nào dưới đây là điểm chung giữa nguyên tắc kiểm soát quyền lực và trách nhiệm giải trình?", a: ["Đều hướng tới phòng ngừa lạm quyền và nâng cao hiệu quả hoạt động của bộ máy nhà nước.", "Đều nhằm mở rộng quyền lực của Chính phủ.", "Đều thay thế vai trò giám sát của Nhân dân.", "Đều chỉ áp dụng trong hoạt động tư pháp."], c: 0 },
+            { q: "Phát biểu nào sau đây đúng nhất về mô hình Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam?", a: ["Quyền lực nhà nước được chia thành ba nhánh hoàn toàn độc lập.", "Đảng trực tiếp thực hiện mọi quyền lập pháp, hành pháp và tư pháp.", "Nhà nước chỉ chịu trách nhiệm trước Quốc hội.", "Quyền lực nhà nước thuộc về Nhân dân; được tổ chức thống nhất, có sự phân công, phối hợp, kiểm soát giữa các cơ quan và hoạt động dưới sự lãnh đạo của Đảng Cộng sản Việt Nam."], c: 3 }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+
+        // Chuyển đổi giữa các tab nội dung
+        function switchTab(event, sectionId) {
+            event.preventDefault();
+            
+            // Xóa trạng thái active cũ
+            document.querySelectorAll('.section-panel').forEach(panel => panel.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            
+            // Thêm active mới
+            document.getElementById(sectionId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            // Cuộn lên đầu trang mềm mại
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Bắt đầu game
+        function startQuiz() {
+            document.getElementById('quiz-start-screen').style.display = 'none';
+            document.getElementById('quiz-play-screen').style.display = 'block';
+            document.getElementById('quiz-result-screen').style.display = 'none';
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers.fill(null);
+            showQuestion();
+        }
+
+        // Hiển thị câu hỏi hiện tại
+        function showQuestion() {
+            const currentQ = quizData[currentQuestionIndex];
+            
+            // Cập nhật số thứ tự câu hỏi và tiến trình thanh bar
+            document.getElementById('current-q-num').innerText = currentQuestionIndex + 1;
+            document.getElementById('current-score').innerText = score * 10; // Giả định mỗi câu 10 điểm
+            
+            const progressPercent = ((currentQuestionIndex) / quizData.length) * 100;
+            document.getElementById('quiz-progress').style.width = progressPercent + '%';
+
+            // Cập nhật nội dung câu hỏi
+            document.getElementById('question-text').innerText = currentQ.q;
+
+            // Xây dựng danh sách đáp án dạng list-items
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            const prefixes = ['A. ', 'B. ', 'C. ', 'D. '];
+            currentQ.a.forEach((option, index) => {
+                const li = document.createElement('li');
+                li.className = 'option-item';
+                li.innerText = prefixes[index] + option;
+                
+                // Nếu người dùng đã chọn đáp án trước đó cho câu này
+                if (userAnswers[currentQuestionIndex] !== null) {
+                    li.classList.add('disabled');
+                    if (index === currentQ.c) {
+                        li.classList.add('correct'); // Màu xanh cho câu đúng
+                    }
+                    if (index === userAnswers[currentQuestionIndex] && index !== currentQ.c) {
+                        li.classList.add('wrong'); // Màu đỏ cho câu sai nếu người dùng chọn nhầm
+                    }
+                } else {
+                    // Nếu chưa chọn, gắn sự kiện click chọn đáp án
+                    li.onclick = () => selectOption(index);
+                }
+                optionsContainer.appendChild(li);
+            });
+
+            // Cập nhật trạng thái các nút Điều hướng điều khiển
+            document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
+            
+            // Chỉ cho phép bấm Câu tiếp theo sau khi đã chọn đáp án câu hiện tại
+            document.getElementById('btn-next').disabled = userAnswers[currentQuestionIndex] === null;
+            if(currentQuestionIndex === quizData.length - 1 && userAnswers[currentQuestionIndex] !== null) {
+                document.getElementById('btn-next').innerText = "Xem kết quả";
+            } else {
+                document.getElementById('btn-next').innerText = "Câu tiếp theo";
+            }
+        }
+
+        // Xử lý khi người dùng click chọn 1 option đáp án
+        function selectOption(selectedIndex) {
+            const currentQ = quizData[currentQuestionIndex];
+            userAnswers[currentQuestionIndex] = selectedIndex;
+
+            if (selectedIndex === currentQ.c) {
+                score++;
+            }
+
+            // Vẽ lại giao diện câu hỏi ngay lập tức để show đáp án Đúng/Sai trực quan
+            showQuestion();
+        }
+
+        // Qua câu hỏi kế tiếp
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Quay lại câu hỏi phía trước
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+            }
+        }
+
+        // Hiển thị bảng điểm kết quả cuối cùng
+        function showResults() {
+            document.getElementById('quiz-play-screen').style.display = 'none';
+            document.getElementById('quiz-result-screen').style.display = 'block';
+
+            const totalScore = score * 10; // Tổng điểm tối đa 500 điểm
+            document.getElementById('final-score').innerText = totalScore;
+            document.getElementById('result-summary').innerText = `Bạn đã trả lời chính xác ${score} trên tổng số ${quizData.length} câu hỏi.`;
+
+            const rankElement = document.getElementById('quiz-rank');
+            rankElement.className = 'rank-text';
+            
+            if (score >= 45) {
+                rankElement.innerText = "Xếp loại: Xuất sắc 🌟";
+                rankElement.classList.add('rank-A');
+            } else if (score >= 35) {
+                rankElement.innerText = "Xếp loại: Khá / Giỏi ✨";
+                rankElement.classList.add('rank-B');
+            } else {
+                rankElement.innerText = "Xếp loại: Cần Cố gắng Thêm 📚";
+                rankElement.classList.add('rank-C');
+            }
+        }
+
+        // Khởi động lại game chơi lại từ đầu
+        function restartQuiz() {
+            startQuiz();
+        }
+    </script>
+</body>
+</html>
