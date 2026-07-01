@@ -73,8 +73,9 @@
             display: block;
         }
 
-        h1 { color: var(--secondary); border-left: 5px solid var(--primary); padding-left: 15px; }
-        h2 { color: var(--primary); }
+        h1 { color: var(--secondary); border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 25px; }
+        h2 { color: var(--primary); margin-top: 25px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px; }
+        h3 { color: var(--secondary); }
         
         /* Grid Layout cho nội dung lý thuyết */
         .grid-cards {
@@ -98,6 +99,7 @@
             padding: 15px;
             border-radius: 4px;
             margin-top: 20px;
+            font-weight: 500;
         }
 
         /* ---------------- MINIGAME STYLE ---------------- */
@@ -140,7 +142,7 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(239, 68, 68, 0.9);
+            background: rgba(239, 68, 68, 0.95);
             color: white;
             z-index: 9999;
             justify-content: center;
@@ -198,7 +200,7 @@
 
         .rank-table th { background: var(--secondary); color: white; }
         .rank-table tr:nth-child(even) { background: #f8fafc; }
-        .rank-table tr:nth-child(2) { font-weight: bold; color: #d97706; background: #fef3c7; } /* Hạng 1 */
+        .rank-table tr:nth-child(2) { font-weight: bold; color: #d97706; background: #fef3c7; }
 
         #lobby-list {
             list-style: none;
@@ -222,33 +224,102 @@
 
     <!-- Thanh Điều Hướng -->
     <nav class="navbar">
-        <a class="nav-tab active" onclick="switchTab('lythuyet')">🏛️ Vai trò lãnh đạo của Đảng</a>
+        <a class="nav-tab active" onclick="switchTab('phandau')">🏛️ 1. Mô hình Nhà nước</a>
+        <a class="nav-tab" onclick="switchTab('lythuyet')">⭐ 2. Vai trò của Đảng</a>
+        <a class="nav-tab" onclick="switchTab('phancuoi')">🤝 3. Liên hệ & Giải trình</a>
         <a class="nav-tab" onclick="switchTab('minigame')">🎮 Trò chơi thử thách</a>
     </nav>
 
     <div class="container">
-        <!-- TAB LÝ THUYẾT -->
-        <div id="lythuyet" class="content-section active">
-            <h1>Vai trò lãnh đạo của Đảng Cộng sản Việt Nam</h1>
-            <p>Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam được xây dựng và hoạt động dưới sự lãnh đạo của Đảng Cộng sản Việt Nam. Đây là một trong những đặc trưng cơ bản nhất được khẳng định trang trọng tại <strong>Điều 4 Hiến pháp năm 2013</strong>. Sự lãnh đạo của Đảng bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân, gắn bó mật thiết với nhân dân và kiên định mục tiêu chủ nghĩa xã hội.</p>
-            
+        
+        <!-- PHẦN 1: MÔ HÌNH NHÀ NƯỚC PHÁP QUYỀN -->
+        <div id="phandau" class="content-section active">
+            <h1>Mô hình Nhà nước Pháp quyền XHCN Việt Nam</h1>
+            <p>Nhà nước pháp quyền được hiểu một cách chung nhất là một kiểu nhà nước thượng tôn pháp luật, hướng tới các vấn đề phúc lợi cho mọi người, tạo điều kiện cho cá nhân được tự do, bình đẳng và phát huy hết năng lực của mình. Trong hoạt động của nhà nước pháp quyền, các cơ quan nhà nước được phân quyền rõ ràng và được mọi người chấp nhận trên nguyên tắc bình đẳng của các thế hệ, giai cấp và tầng lớp xã hội.</p>
+            <p>Mô tả và giải thích được cơ cấu tổ chức, nguyên tắc vận hành của bộ máy Nhà nước pháp quyền XHCN Việt Nam (quyền lực nhà nước là thống nhất, có sự phân công, phối hợp và kiểm soát giữa các cơ quan lập pháp, hành pháp, tư pháp).</p>
+
+            <h2>1. Nguyên tắc quyền lực nhà nước là thống nhất</h2>
+            <p>Quyền lực nhà nước tại Việt Nam không chia cắt mà là một thể thống nhất, tất cả quyền lực nhà nước đều thuộc về nhân dân. Nhân dân thực hiện quyền lực này thông qua các hình thức dân chủ trực tiếp và dân chủ đại diện, trong đó Quốc hội được xác định là cơ quan quyền lực nhà nước cao nhất. Sự thống nhất này đảm bảo rằng mọi hoạt động của bộ máy nhà nước đều hướng tới mục tiêu phục vụ lợi ích của nhân dân, do nhân dân lao động làm chủ.</p>
+
+            <h2>2. Sự phân công, phối hợp và kiểm soát quyền lực</h2>
+            <p>Dù quyền lực là thống nhất, nhưng bộ máy nhà nước được tổ chức theo nguyên tắc có sự phân công rành mạch, phối hợp chặt chẽ và tăng cường kiểm soát giữa các cơ quan nhà nước trong việc thực hiện ba quyền cơ bản:</p>
             <div class="grid-cards">
                 <div class="card">
-                    <h3>⭐ Hoạch định đường lối</h3>
-                    <p>Đảng giữ vai trò định hướng chiến lược trên các lĩnh vực kinh tế, chính trị, văn hóa, xã hội. Trên cơ sở nghị quyết của Đảng, các cơ quan Nhà nước sẽ cụ thể hóa thành luật, chính sách.</p>
+                    <h3>🔷 Phân công (Lập pháp, Hành pháp, Tư pháp)</h3>
+                    <p>Các nhánh quyền lực được giao nhiệm vụ cụ thể để đảm bảo tính chuyên nghiệp và hiệu quả trong quản lý xã hội.</p>
                 </div>
                 <div class="card">
-                    <h3>🔷 Lãnh đạo không thay thế</h3>
-                    <p>Đảng lãnh đạo bằng cương lĩnh, đường lối và công tác cán bộ, chứ không làm thay chức năng hành chính của Nhà nước. Các cơ quan lập pháp, hành pháp, tư pháp vẫn chủ động vận hành đúng thẩm quyền.</p>
+                    <h3>🤝 Phối hợp</h3>
+                    <p>Các cơ quan lập pháp, hành pháp và tư pháp phải có cơ chế phối hợp nhịp nhàng để thực hiện các nhiệm vụ chung của quốc gia, tránh sự chồng chéo hoặc cản trở lẫn nhau trong quá trình vận hành.</p>
                 </div>
                 <div class="card">
-                    <h3>🔍 Kiểm tra & Giám sát</h3>
-                    <p>Đảng lãnh đạo công tác cán bộ; thường xuyên chỉnh don, kiên quyết đấu tranh phòng, chống tham nhũng, lãng phí để xây dựng một bộ máy Nhà nước thực sự trong sạch, vững mạnh.</p>
+                    <h3>🔍 Kiểm soát quyền lực</h3>
+                    <p>Đây là một đặc điểm cốt yếu để ngăn ngừa việc lạm dụng quyền lực và các tệ nạn như tham nhũng, lãng phí. Nhà nước thiết lập các cơ chế và biện pháp kiểm soát lẫn nhau giữa các cơ quan, đồng thời chịu sự giám sát của nhân dân thông qua phương châm "Dân biết, dân bàn, dân làm, dân kiểm tra".</p>
                 </div>
             </div>
 
+            <h2>3. Nguyên tắc tập trung dân chủ & Thượng tôn pháp luật</h2>
+            <h3>• Nguyên tắc tập trung dân chủ trong vận hành</h3>
+            <p>Bộ máy nhà nước vận hành theo nguyên tắc tập trung dân chủ. Nguyên tắc này đòi hỏi tổ chức bộ máy vừa phải đảm bảo tính tập trung, thống nhất quyền lực, có sự phân công, phân cấp rõ ràng, vừa phải bảo đảm sự chỉ đạo thống nhất của Trung ương. Điều này giúp bộ máy nhà nước vừa phát huy được tính chủ động của các địa phương, cơ quan, vừa giữ vững sự ổn định và thống nhất của toàn bộ hệ thống chính trị.</p>
+            
+            <h3>• Thượng tôn Hiến pháp và Pháp luật</h3>
+            <p>Nhà nước pháp quyền XHCN Việt Nam được tổ chức và hoạt động trên cơ sở Hiến pháp và pháp luật. Pháp luật được đặt ở vị trí tối thượng để điều chỉnh các quan hệ xã hội. Mọi cơ quan nhà nước, cán bộ, công chức và viên chức đều phải nghiêm chỉnh chấp hành pháp luật, bảo đảm tính nghiêm minh của kỷ cương xã hội.</p>
+
             <div class="highlight-box">
-                Đảng xác định nguyên tắc "lấy dân làm gốc", mọi chủ trương đường lối đều hướng tới lợi ích của nhân dân. Thông qua sự lãnh đạo của Đảng, Nhà nước không ngừng hoàn thiện cơ chế để nhân dân thực hiện quyền làm chủ thực tế.
+                Tóm lại, mô hình này là sự kết hợp giữa việc tập trung quyền lực vào tay nhân dân với việc chuyên môn hóa hoạt động quản lý thông qua sự phân công quyền lực, dưới sự lãnh đạo duy nhất của Đảng Cộng sản Việt Nam để đảm bảo định hướng xã hội chủ nghĩa.
+            </div>
+        </div>
+
+        <!-- PHẦN 2: VAI TRÒ LÃNH ĐẠO CỦA ĐẢNG -->
+        <div id="lythuyet" class="content-section">
+            <h1>Vai trò lãnh đạo của Đảng Cộng sản Việt Nam</h1>
+            
+            <h2>1. Lực lượng lãnh đạo Nhà nước và xã hội</h2>
+            <p>Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam được xây dựng và hoạt động dưới sự lãnh đạo của Đảng Cộng sản Việt Nam. Đây là một trong những đặc trưng cơ bản của mô hình Nhà nước pháp quyền xã hội chủ nghĩa ở nước ta, được khẳng định trong Điều 4 Hiến pháp năm 2013. Sự lãnh đạo của Đảng bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân, đồng thời gắn bó chặt chẽ với nhân dân và dân tộc, kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội.</p>
+
+            <h2>2. Định hướng đường lối và chiến lược phát triển đất nước</h2>
+            <p>Đảng giữ vai trò hoạch định đường lối, chủ trương và định hướng phát triển đất nước trên các lĩnh vực kinh tế, chính trị, văn hóa, xã hội, quốc phòng và đối ngoại. Thông qua các nghị quyết, chiến lược và chủ trương lớn, Đảng định hướng cho quá trình xây dựng, hoàn thiện hệ thống pháp luật và tổ chức hoạt động của bộ máy nhà nước. Trên cơ sở đó, Quốc hội, Chính phủ, Tòa án và các cơ quan nhà nước cụ thể hóa thành chính sách, pháp luật và chương trình hành động để thực hiện trong thực tiễn.</p>
+
+            <h2>3. Lãnh đạo nhưng không thay thế chức năng của Nhà nước</h2>
+            <p>Trong Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam, Đảng thực hiện vai trò lãnh đạo bằng cương lĩnh, đường lối, chủ trương và công tác cán bộ, chứ không làm thay chức năng quản lý của Nhà nước. Các cơ quan nhà nước vẫn thực hiện đầy đủ quyền lập pháp, hành pháp và tư pháp theo quy định của Hiến pháp và pháp luật. Điều này vừa bảo đảm vai trò lãnh đạo của Đảng, vừa phát huy tính chủ động, trách nhiệm và hiệu quả hoạt động của bộ máy nhà nước.</p>
+
+            <h2>4. Đội ngũ cán bộ, kiểm soát quyền lực và gắn bó với Nhân dân</h2>
+            <p>Đảng có vai trò quan trọng trong việc xây dựng đội ngũ cán bộ, công chức có phẩm chất chính trị, đạo đức và năng lực chuyên môn đáp ứng yêu cầu quản lý nhà nước. Đồng thời, Đảng thường xuyên thực hiện công tác kiểm tra, giám sát, chỉnh đốn Đảng, kiên quyết đấu tranh phòng, chống tham nhũng, lãng phí, quan liêu và các biểu hiện suy thoái. Đảng xác định nguyên tắc "lấy dân làm gốc", mọi chủ trương, đường lối đều hướng tới lợi ích của nhân dân.</p>
+
+            <div class="highlight-box">
+                Tóm lại Đảng Cộng sản Việt Nam giữ vai trò lãnh đạo toàn diện đối với Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam. Sự lãnh đạo đó là nhân tố quyết định giúp Nhà nước giữ vững định hướng xã hội chủ nghĩa, hoạt động hiệu lực, hiệu quả và phục vụ lợi ích của nhân dân.
+            </div>
+        </div>
+
+        <!-- PHẦN 3: MỐI LIÊN HỆ VÀ TRÁCH NHIỆM GIẢI TRÌNH -->
+        <div id="phancuoi" class="content-section">
+            <h1>Mối liên hệ và trách nhiệm giải trình trước nhân dân</h1>
+            <p>Theo Hiến pháp năm 2013, tất cả quyền lực nhà nước thuộc về Nhân dân. Điều đó có nghĩa là các cơ quan nhà nước không phải là chủ thể nắm giữ quyền lực cho riêng mình mà là những cơ quan được Nhân dân trao quyền để thay mặt Nhân dân quản lý và điều hành đất nước. Chính vì được Nhân dân trao quyền nên các cơ quan nhà nước có trách nhiệm báo cáo, giải thích và chịu sự giám sát của Nhân dân trong quá trình thực hiện quyền lực đó.</p>
+
+            <h2>1. Mối liên hệ khăng khít hai chiều</h2>
+            <p>Mối liên hệ giữa các cơ quan nhà nước với Nhân dân được thể hiện trước hết ở việc Nhân dân là chủ thể tạo nên quyền lực nhà nước thông qua bầu cử Quốc hội và Hội đồng nhân dân các cấp. Nhà nước có trách nhiệm duy trì mối liên hệ thường xuyên với Nhân dân thông qua hoạt động tiếp xúc cử tri, lấy ý kiến Nhân dân, tiếp công dân, giải quyết khiếu nại, tố cáo và công khai thông tin về hoạt động quản lý nhà nước.</p>
+
+            <h2>2. Trách nhiệm giải trình chi tiết của các cơ quan</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>🏛️ Đối với Quốc hội</h3>
+                    <p>Các đại biểu Quốc hội thường xuyên tiếp xúc cử tri, lắng nghe ý kiến, kiến nghị của Nhân dân và phản ánh vào hoạt động lập pháp, giám sát. Đại biểu chịu trách nhiệm trước cử tri và phải báo cáo về việc thực hiện nhiệm vụ.</p>
+                </div>
+                <div class="card">
+                    <h3>🏢 Đối với Chính phủ (Hành chính)</h3>
+                    <p>Thực hiện thông qua việc công khai, minh bạch các chính sách, dự án và ngân sách; giải thích cho người dân về các quyết định hành chính; tiếp nhận kiến nghị và chịu sự giám sát tối cao.</p>
+                </div>
+                <div class="card">
+                    <h3>⚖️ Đối với Cơ quan Tư pháp (Tòa án, Viện kiểm sát)</h3>
+                    <p>Bảo đảm mọi hoạt động xét xử, truy tố đều tuân thủ Hiến pháp; công khai bản án; giải thích rõ căn cứ pháp lý của các phán quyết nhằm bảo vệ công lý và quyền con người.</p>
+                </div>
+            </div>
+
+            <h2>3. Quyền giám sát tối cao của Nhân dân</h2>
+            <p>Nhân dân thực hiện quyền giám sát đối với các cơ quan nhà nước thông qua nhiều hình thức như bầu cử, tiếp xúc cử tri, khiếu nại, tố cáo, phản biện xã hội, giám sát của Mặt trận Tổ quốc Việt Nam và các tổ chức chính trị - xã hội. Thông qua các cơ chế này, Nhân dân có thể kiểm tra việc thực hiện quyền lực nhà nước, phát hiện những sai phạm và yêu cầu xử lý theo pháp luật.</p>
+
+            <div class="highlight-box">
+                Mối liên hệ giữa các cơ quan nhà nước và Nhân dân là mối quan hệ hai chiều: Nhân dân trao quyền cho Nhà nước thực hiện quản lý xã hội, còn Nhà nước phải phục vụ Nhân dân, chịu sự giám sát của Nhân dân và có trách nhiệm giải trình trước Nhân dân.
             </div>
         </div>
 
@@ -262,7 +333,7 @@
                 <input type="text" id="username-input" class="input-field" placeholder="Nhập tên của bạn..." maxlength="15"><br>
                 <button class="btn" onclick="joinLobby()">Vào Phòng Chờ</button>
                 <div style="margin-top: 20px; font-size: 13px; color: #64748b;">
-                    Nếu bạn là người quản trò (Host), hãy bấm vào nút Admin bên dưới: <br>
+                    Nếu bạn là người quản trò (Host), hãy bấm nút dưới để nhập mã khóa bảo mật: <br>
                     <button class="btn btn-admin" style="padding: 5px 10px; font-size: 12px;" onclick="becomeAdmin()">Kích hoạt quyền Admin</button>
                 </div>
             </div>
@@ -321,22 +392,23 @@
     </div>
 
     <script>
-        // Cấu hình Firebase Realtime Database công khai tạm thời cho nhóm sử dụng
+        // Cấu hình Firebase Realtime Database
         const firebaseConfig = {
             databaseURL: "https://realtime-quiz-fpt-default-rtdb.asia-southeast1.firebasedatabase.app/"
         };
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // Dữ liệu bộ câu hỏi mẫu về Nhà nước pháp quyền
+        // Cập nhật bộ câu hỏi dựa theo chính xác tài liệu bạn cung cấp
         const quizData = [
-            { q: "Đặc trưng cơ bản của mô hình Nhà nước pháp quyền XHCN Việt Nam là đặt dưới sự lãnh đạo của tổ chức nào?", a: ["Đảng Cộng sản Việt Nam", "Mặt trận Tổ quốc", "Hội Luật gia Việt Nam", "Tổng Liên đoàn Lao động"], c: 0 },
-            { q: "Vai trò lãnh đạo của Đảng đối với Nhà nước được khẳng định trang trọng tại Điều mấy của Hiến pháp năm 2013?", a: ["Điều 1", "Điều 2", "Điều 4", "Điều 5"], c: 2 },
-            { q: "Đảng Cộng sản Việt Nam thực hiện vai trò lãnh đạo bằng phương thức nào sau đây?", a: ["Làm thay chức năng cơ quan Nhà nước", "Bằng cương lĩnh, đường lối và công tác cán bộ", "Tự ban hành các bộ luật thay Quốc hội", "Trực tiếp xét xử các vụ án hình sự"], c: 1 },
-            { q: "Trong Nhà nước pháp quyền XHCN Việt Nam, cơ quan nào thực hiện chức năng lập pháp?", a: ["Chính phủ", "Tòa án nhân dân", "Quốc hội", "Viện kiểm sát"], c: 2 },
-            { q: "Nguyên tắc cốt lõi nào thể hiện sự gắn bó mật thiết giữa Đảng, Nhà nước với nhân dân?", a: ["Lấy dân làm gốc", "Tự lực tự cường", "Tập trung tuyệt đối", "Bảo mật thông tin"], c: 0 },
-            { q: "Khẳng định nào đúng khi nói về mối quan hệ giữa Đảng và Nhà nước?", a: ["Đảng làm thay Nhà nước", "Nhà nước đứng trên Đảng", "Đảng lãnh đạo nhưng không thay thế chức năng của Nhà nước", "Đảng và Nhà nước độc lập hoàn toàn không liên quan"], c: 2 },
-            { q: "Đảng thực hiện công tác kiểm tra, giám sát nhằm mục đích lớn nhất là gì?", a: ["Tăng số lượng đảng viên", "Xây dựng bộ máy Nhà nước trong sạch, vững mạnh", "Thay thế toàn bộ hệ thống luật pháp", "Hạn chế quyền làm chủ của nhân dân"], c: 1 }
+            { q: "Mô hình Nhà nước pháp quyền XHCN Việt Nam đặt dưới sự lãnh đạo duy nhất của tổ chức nào?", a: ["Mặt trận Tổ quốc", "Đảng Cộng sản Việt Nam", "Quốc hội", "Chính phủ"], c: 1 },
+            { q: "Theo Hiến pháp 2013, tất cả quyền lực nhà nước thuộc về đối tượng nào?", a: ["Các cơ quan tư pháp", "Cán bộ công chức", "Nhân dân", "Ban chấp hành Trung ương"], c: 2 },
+            { q: "Cơ quan nào được xác định là cơ quan quyền lực nhà nước cao nhất tại Việt Nam?", a: ["Quốc hội", "Chính phủ", "Tòa án nhân dân tối cao", "Viện kiểm sát nhân dân tối cao"], c: 0 },
+            { q: "Phương châm nào thể hiện sự giám sát của nhân dân đối với cơ chế kiểm soát quyền lực?", a: ["Dân biết, dân bàn, dân làm, dân kiểm tra", "Làm theo năng lực, hưởng theo nhu cầu", "Thượng tôn pháp luật, kỷ cương nghiêm minh", "Tập trung dân chủ, phân cấp rõ ràng"], c: 0 },
+            { q: "Đặc trưng cơ bản về vai trò của Đảng được khẳng định tại Điều mấy của Hiến pháp 2013?", a: ["Điều 1", "Điều 2", "Điều 4", "Điều 10"], c: 2 },
+            { q: "Đảng Cộng sản Việt Nam thực hiện vai trò lãnh đạo Nhà nước bằng cách nào?", a: ["Trực tiếp làm thay chức năng hành chính", "Bằng cương lĩnh, đường lối, chủ trương và công tác cán bộ", "Tự ban hành các quyết định hành chính cấp tỉnh", "Thay mặt Tòa án xét xử các vụ án"], c: 1 },
+            { q: "Mối liên hệ giữa các cơ quan nhà nước và Nhân dân được khẳng định là mối quan hệ gì?", a: ["Mối quan hệ một chiều từ trên xuống", "Mối quan hệ độc lập không can thiệp", "Mối quan hệ hai chiều phụ thuộc lẫn nhau", "Mối quan hệ tạm thời theo nhiệm kỳ"], c: 2 },
+            { q: "Trách nhiệm giải trình của các cơ quan tư pháp (Tòa án, Viện kiểm sát) thể hiện qua việc gì?", a: ["Bảo đảm xét xử, truy tố tuân thủ Hiến pháp và công khai bản án", "Tự quyết định ngân sách quốc gia", "Thay đổi nội dung Hiến pháp khi cần", "Tổ chức bầu cử Đại biểu Quốc hội"], c: 0 }
         ];
 
         let myName = "";
@@ -344,7 +416,7 @@
         let isAdmin = false;
         let score = 0;
         let currentQuestionIndex = 0;
-        let totalTime = 120; // 2 phút bằng 120 giây
+        let totalTime = 120;
         let countdownInterval;
 
         function switchTab(tabId) {
@@ -354,13 +426,18 @@
             event.currentTarget.classList.add('active');
         }
 
+        // BẢO MẬT: Nhập mã khóa bí mật để kích hoạt quyền Admin
         function becomeAdmin() {
-            isAdmin = true;
-            document.getElementById('admin-controls').style.display = 'block';
-            alert("Bạn đã kích hoạt quyền Admin/Quản trò thành công!");
+            const password = prompt("Nhập mật mã để kích hoạt quyền Admin quản trò:");
+            if (password === "EPR301") {
+                isAdmin = true;
+                document.getElementById('admin-controls').style.display = 'block';
+                alert("Xác thực hoàn tất! Bạn đã là Quản trò trận đấu.");
+            } else {
+                alert("Mật mã không đúng! Bạn không thể lấy quyền Admin.");
+            }
         }
 
-        // Vào phòng chờ
         function joinLobby() {
             const input = document.getElementById('username-input').value.trim();
             if (!input) return alert("Vui lòng nhập tên!");
@@ -371,12 +448,9 @@
             document.getElementById('screen-join').style.display = 'none';
             document.getElementById('screen-lobby').style.display = 'block';
 
-            // Đăng ký tài khoản lên Firebase phòng chờ
             db.ref('lobby/' + myId).set({ name: myName, score: 0 });
-            // Khi tắt tab hoặc thoát thì tự động xóa tên khỏi phòng
             db.ref('lobby/' + myId).onDisconnect().remove();
 
-            // Lắng nghe danh sách người chơi trong phòng chờ
             db.ref('lobby').on('value', snapshot => {
                 const listUl = document.getElementById('lobby-list');
                 listUl.innerHTML = "";
@@ -387,7 +461,6 @@
                 });
             });
 
-            // Lắng nghe lệnh khởi chạy game từ Admin
             db.ref('gameState').on('value', snapshot => {
                 if (snapshot.val() && snapshot.val().status === "START") {
                     enterGame();
@@ -395,14 +468,12 @@
             });
         }
 
-        // Admin bấm kích hoạt đồng loạt
         function startGameByAdmin() {
             db.ref('gameState').set({ status: "START", timestamp: Date.now() });
         }
 
-        // Chuyển sang giao diện chơi game
         function enterGame() {
-            db.ref('lobby').off(); // Ngắt lắng nghe phòng chờ
+            db.ref('lobby').off();
             document.getElementById('screen-lobby').style.display = 'none';
             document.getElementById('screen-game').style.display = 'block';
             
@@ -410,7 +481,6 @@
             startTimer();
         }
 
-        // Đếm ngược 2 phút toàn trận
         function startTimer() {
             countdownInterval = setInterval(() => {
                 totalTime--;
@@ -422,10 +492,9 @@
             }, 1000);
         }
 
-        // Hiển thị câu hỏi
         function showQuestion() {
             if (currentQuestionIndex >= quizData.length) {
-                currentQuestionIndex = 0; // Trộn lặp lại câu hỏi nếu làm hết trước 2 phút
+                currentQuestionIndex = 0; // Trộn lặp lại câu hỏi nếu làm xong sớm
             }
             const currentQuiz = quizData[currentQuestionIndex];
             document.getElementById('question-text').innerText = `Câu ${currentQuestionIndex + 1}: ${currentQuiz.q}`;
@@ -442,29 +511,24 @@
             });
         }
 
-        // Kiểm tra đáp án & Xử lý trừ/cộng điểm và Phạt 5s
         function checkAnswer(selectedIndex) {
             const currentQuiz = quizData[currentQuestionIndex];
             if (selectedIndex === currentQuiz.c) {
-                // Đúng +100 điểm
                 score += 100;
                 document.getElementById('game-score').innerText = score;
                 db.ref('lobby/' + myId).update({ score: score });
                 currentQuestionIndex++;
                 showQuestion();
             } else {
-                // Sai: Trừ 50 điểm (nếu điểm lớn hơn 0)
                 if (score > 0) {
                     score = Math.max(0, score - 50);
                     document.getElementById('game-score').innerText = score;
                     db.ref('lobby/' + myId).update({ score: score });
                 }
-                // Phạt khóa màn hình 5 giây
                 triggerPenalty();
             }
         }
 
-        // Kích hoạt hình phạt 5 giây đóng băng
         function triggerPenalty() {
             const penaltyScreen = document.getElementById('penalty-screen');
             const penaltyTimer = document.getElementById('penalty-timer');
@@ -479,30 +543,26 @@
                 if (timeLeft <= 0) {
                     clearInterval(interval);
                     penaltyScreen.style.display = 'none';
-                    currentQuestionIndex++; // Chuyển sang câu tiếp theo sau khi bị phạt
+                    currentQuestionIndex++;
                     showQuestion();
                 }
             }, 1000);
         }
 
-        // Kết thúc trò chơi và lấy Bảng xếp hạng RANK từ Firebase từ cao xuống thấp
         function endGame() {
             document.getElementById('screen-game').style.display = 'none';
             document.getElementById('screen-rank').style.display = 'block';
 
-            // Reset trạng thái admin trên server để lần sau chơi lại không bị lỗi tự động chạy
             if (isAdmin) {
                 db.ref('gameState').set({ status: "WAIT" });
             }
 
-            // Đọc bảng điểm từ cơ sở dữ liệu sắp xếp theo thứ tự
             db.ref('lobby').once('value', snapshot => {
                 const players = [];
                 snapshot.forEach(child => {
                     players.push(child.val());
                 });
 
-                // Sắp xếp điểm số từ cao xuống thấp
                 players.sort((a, b) => b.score - a.score);
 
                 const tbody = document.getElementById('rank-tbody');
