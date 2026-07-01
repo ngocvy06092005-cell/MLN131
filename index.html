@@ -3,93 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhà Nước Pháp Quyền XHCN Việt Nam</title>
+    <title>Nhà Nước Pháp Quyền XHCN Việt Nam - MLN131</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <span class="logo-icon">⚖️</span>
-                <span>Nhà Nước Pháp Quyền XHCN VN</span>
+            <div class="nav-brand">
+                <span class="brand-icon">⚖️</span>
+                <span class="brand-text">Nhà Nước Pháp Quyền XHCN VN</span>
             </div>
-            <div class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link active" onclick="navigateTo('home')">Trang Chủ</a>
-                <a href="#content" class="nav-link" onclick="navigateTo('content')">Nội Dung</a>
-                <a href="#game" class="nav-link" onclick="navigateTo('game')">Mini Game</a>
-                <button class="admin-btn" onclick="openAdminPanel()">🔐 Kích hoạt Quyền Admin</button>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active" onclick="navigateTo('home')">🏠 Trang Chủ</a>
+                <a href="#content" class="nav-link" onclick="navigateTo('content')">📚 Nội Dung</a>
+                <a href="#game" class="nav-link" onclick="navigateTo('game')">🎮 Mini Game</a>
+                <button class="nav-link admin-trigger" onclick="openAdminPanel()">🔐 Quyền Admin</button>
             </div>
         </div>
     </nav>
 
-    <!-- Admin Panel Modal -->
+    <!-- Admin Modal -->
     <div id="adminModal" class="modal hidden">
-        <div class="modal-content">
+        <div class="modal-content admin-modal">
             <div class="modal-header">
-                <h2>Xác Thực Admin</h2>
-                <span class="close" onclick="closeAdminPanel()">&times;</span>
+                <h2>🔐 Xác Thực Admin</h2>
+                <button class="modal-close" onclick="closeAdminPanel()">&times;</button>
             </div>
             <div class="modal-body">
-                <input type="password" id="adminPassword" placeholder="Nhập mật khẩu admin" class="admin-input">
-                <button class="btn btn-primary" onclick="verifyAdmin()">Xác Thực</button>
+                <p>Nhập mật khẩu admin để kích hoạt:</p>
+                <input type="password" id="adminPassword" placeholder="Mật khẩu admin" class="admin-input" onkeypress="if(event.key==='Enter') verifyAdmin()">
+                <div class="modal-buttons">
+                    <button class="btn btn-primary" onclick="verifyAdmin()">Xác Thực</button>
+                    <button class="btn btn-secondary" onclick="closeAdminPanel()">Hủy</button>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Home Section -->
-        <section id="home" class="section active">
-            <div class="home-hero">
+        <!-- ===== HOME PAGE ===== -->
+        <section id="home" class="page active">
+            <!-- Hero Section -->
+            <div class="hero">
                 <div class="hero-content">
-                    <h1>Mô Hình Nhà Nước Pháp Quyền<br><span class="highlight">Xã Hội Chủ Nghĩa Việt Nam</span></h1>
-                    <p class="hero-subtitle">Hiểu rõ về cơ cấu, nguyên tắc và vai trò của Nhà nước trong xã hội</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="navigateTo('content')">Khám Phá Nội Dung</button>
-                        <button class="btn btn-secondary" onclick="navigateTo('game')">Chơi Mini Game</button>
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            Mô Hình Nhà Nước Pháp Quyền
+                            <span class="gradient-text">Xã Hội Chủ Nghĩa Việt Nam</span>
+                        </h1>
+                        <p class="hero-description">
+                            Tìm hiểu chi tiết về cơ cấu, nguyên tắc vận hành và vai trò của các cơ quan nhà nước trong hệ thống chính trị xã hội chủ nghĩa Việt Nam
+                        </p>
+                        <div class="hero-buttons">
+                            <button class="btn btn-primary btn-lg" onclick="navigateTo('content')">
+                                Khám Phá Nội Dung
+                            </button>
+                            <button class="btn btn-secondary btn-lg" onclick="navigateTo('game')">
+                                Chơi Mini Game
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <div class="hero-image">
-                    <div class="hero-circle">
-                        <div class="circle-item">Quyền Lực</div>
-                        <div class="circle-item">Pháp Luật</div>
-                        <div class="circle-item">Nhân Dân</div>
+                    <div class="hero-image">
+                        <div class="pyramid">
+                            <div class="pyramid-level level-1">Nhân Dân</div>
+                            <div class="pyramid-level level-2">Quốc Hội</div>
+                            <div class="pyramid-level level-3">
+                                <div>Lập Pháp</div>
+                                <div>Hành Pháp</div>
+                                <div>Tư Pháp</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Features Section -->
-            <section class="features">
+            <section class="features-section">
                 <h2>Các Nội Dung Chính</h2>
                 <div class="features-grid">
-                    <div class="feature-card" onclick="navigateTo('content'); scrollToSection('structure')">
+                    <div class="feature-card" onclick="navigateTo('content'); scrollDelay(() => showSection('structure'))">
                         <div class="feature-icon">🏛️</div>
                         <h3>Cơ Cấu Tổ Chức</h3>
-                        <p>Tìm hiểu về cấu trúc và tổ chức các cơ quan nhà nước</p>
+                        <p>Tìm hiểu về cấu trúc và tổ chức các cơ quan nhà nước Việt Nam</p>
+                        <span class="feature-arrow">→</span>
                     </div>
-                    <div class="feature-card" onclick="navigateTo('content'); scrollToSection('principles')">
+                    <div class="feature-card" onclick="navigateTo('content'); scrollDelay(() => showSection('principles'))">
                         <div class="feature-icon">⚙️</div>
                         <h3>Nguyên Tắc Vận Hành</h3>
                         <p>Khám phá các nguyên tắc cơ bản điều chỉnh hoạt động nhà nước</p>
+                        <span class="feature-arrow">→</span>
                     </div>
-                    <div class="feature-card" onclick="navigateTo('content'); scrollToSection('leadership')">
+                    <div class="feature-card" onclick="navigateTo('content'); scrollDelay(() => showSection('leadership'))">
                         <div class="feature-icon">🎯</div>
                         <h3>Vai Trò Lãnh Đạo</h3>
                         <p>Nắm bắt vai trò lãnh đạo của Đảng Cộng sản Việt Nam</p>
+                        <span class="feature-arrow">→</span>
                     </div>
-                    <div class="feature-card" onclick="navigateTo('content'); scrollToSection('accountability')">
+                    <div class="feature-card" onclick="navigateTo('content'); scrollDelay(() => showSection('accountability'))">
                         <div class="feature-icon">📋</div>
                         <h3>Trách Nhiệm Giải Trình</h3>
                         <p>Hiểu rõ về trách nhiệm giải trình của các cơ quan nhà nước</p>
+                        <span class="feature-arrow">→</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Interactive Stats -->
+            <!-- Statistics Section -->
             <section class="stats-section">
-                <h2>Thông Tin Nhanh</h2>
-                <div class="stats-grid">
+                <div class="stats-container">
                     <div class="stat-card">
                         <div class="stat-number">1</div>
                         <div class="stat-label">Quyền Lực Thống Nhất</div>
@@ -99,369 +122,563 @@
                         <div class="stat-label">Nhánh Quyền Lực</div>
                     </div>
                     <div class="stat-card">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Nguyên Tắc Cơ Bản</div>
+                    </div>
+                    <div class="stat-card">
                         <div class="stat-number">50</div>
-                        <div class="stat-label">Câu Hỏi Ôn Tập</div>
+                        <div class="stat-label">Câu Hỏi Game</div>
                     </div>
                 </div>
             </section>
         </section>
 
-        <!-- Content Section -->
-        <section id="content" class="section">
+        <!-- ===== CONTENT PAGE ===== -->
+        <section id="content" class="page">
             <div class="content-header">
                 <h1>Nội Dung Chi Tiết</h1>
-                <p>Tìm hiểu chi tiết về mô hình Nhà nước pháp quyền XHCN Việt Nam</p>
+                <p>Hiểu sâu hơn về mô hình Nhà nước pháp quyền XHCN Việt Nam</p>
             </div>
 
-            <!-- Navigation Menu -->
+            <!-- Content Navigation -->
             <div class="content-nav">
-                <button class="content-nav-btn active" onclick="showContentSection('structure')">Cơ Cấu Tổ Chức</button>
-                <button class="content-nav-btn" onclick="showContentSection('principles')">Nguyên Tắc Vận Hành</button>
-                <button class="content-nav-btn" onclick="showContentSection('leadership')">Vai Trò Lãnh Đạo</button>
-                <button class="content-nav-btn" onclick="showContentSection('accountability')">Trách Nhiệm Giải Trình</button>
+                <button class="content-nav-btn active" onclick="showSection('structure')">
+                    Cơ Cấu Tổ Chức
+                </button>
+                <button class="content-nav-btn" onclick="showSection('principles')">
+                    Nguyên Tắc Vận Hành
+                </button>
+                <button class="content-nav-btn" onclick="showSection('leadership')">
+                    Vai Trò Lãnh Đạo
+                </button>
+                <button class="content-nav-btn" onclick="showSection('accountability')">
+                    Trách Nhiệm Giải Trình
+                </button>
             </div>
 
             <!-- Structure Section -->
-            <div id="structure" class="content-subsection active">
-                <h2 id="structure-title">Mô Tả và Giải Thích Cơ Cấu Tổ Chức</h2>
+            <div id="structure" class="content-section active">
+                <h2>Mô Tả và Giải Thích Cơ Cấu Tổ Chức</h2>
                 
-                <div class="info-box info-primary">
+                <div class="info-box info-blue">
                     <h3>💡 Khái Niệm Nhà Nước Pháp Quyền</h3>
                     <p>Nhà nước pháp quyền được hiểu một cách chung nhất là một kiểu nhà nước thường tôn pháp luật, hướng tới các vấn đề phúc lợi cho mọi người, tạo điều kiện cho cá nhân được tự do, bình đẳng và phát huy hết năng lực của mình.</p>
                 </div>
 
-                <div class="structure-diagram">
-                    <div class="org-chart">
-                        <div class="org-level-1">
-                            <div class="org-box primary">Nhân Dân</div>
+                <div class="org-diagram">
+                    <div class="diagram-item" style="--delay: 0s;">
+                        <div class="diagram-box level-1">
+                            <span class="box-icon">👥</span>
+                            <span>Nhân Dân</span>
+                            <span class="box-subtitle">Chủ thể quyền lực</span>
                         </div>
-                        <div class="org-arrow">↓</div>
-                        <div class="org-level-2">
-                            <div class="org-box secondary">Quốc Hội<br>(Cơ quan quyền lực cao nhất)</div>
+                    </div>
+                    <div class="diagram-arrow">⬇️</div>
+                    <div class="diagram-item" style="--delay: 0.3s;">
+                        <div class="diagram-box level-2">
+                            <span class="box-icon">🏛️</span>
+                            <span>Quốc Hội</span>
+                            <span class="box-subtitle">Cơ quan quyền lực cao nhất</span>
                         </div>
-                        <div class="org-arrow">↓</div>
-                        <div class="org-level-3">
-                            <div class="org-box tertiary">
-                                <div>Lập Pháp</div>
-                            </div>
-                            <div class="org-box tertiary">
-                                <div>Hành Pháp</div>
-                            </div>
-                            <div class="org-box tertiary">
-                                <div>Tư Pháp</div>
-                            </div>
+                    </div>
+                    <div class="diagram-arrow">⬇️</div>
+                    <div class="diagram-item three-cols" style="--delay: 0.6s;">
+                        <div class="diagram-box level-3">
+                            <span class="box-icon">📝</span>
+                            <span>Lập Pháp</span>
+                            <span class="box-subtitle">Soạn thảo pháp luật</span>
+                        </div>
+                        <div class="diagram-box level-3">
+                            <span class="box-icon">⚙️</span>
+                            <span>Hành Pháp</span>
+                            <span class="box-subtitle">Thực hiện chính sách</span>
+                        </div>
+                        <div class="diagram-box level-3">
+                            <span class="box-icon">⚖️</span>
+                            <span>Tư Pháp</span>
+                            <span class="box-subtitle">Xét xử tranh chấp</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="principle-cards">
-                    <div class="principle-card">
-                        <h4>Nguyên Tắc 1: Quyền Lực Thống Nhất</h4>
-                        <ul>
-                            <li>Quyền lực nhà nước không chia cắt mà là một thể thống nhất</li>
-                            <li>Tất cả quyền lực nhà nước thuộc về nhân dân</li>
-                            <li>Nhân dân thực hiện quyền lực thông qua dân chủ trực tiếp và dân chủ đại diện</li>
-                            <li>Quốc hội là cơ quan quyền lực nhà nước cao nhất</li>
-                            <li>Sự thống nhất đảm bảo mọi hoạt động hướng tới phục vụ lợi ích nhân dân</li>
-                        </ul>
+                <div class="principles-container">
+                    <div class="principle-item">
+                        <div class="principle-number">1️⃣</div>
+                        <div class="principle-content">
+                            <h4>Quyền Lực Nhà Nước Là Thống Nhất</h4>
+                            <ul>
+                                <li>✓ Quyền lực nhà nước không chia cắt mà là một thể thống nhất</li>
+                                <li>✓ Tất cả quyền lực nhà nước thuộc về nhân dân</li>
+                                <li>✓ Nhân dân thực hiện quyền lực thông qua dân chủ trực tiếp và dân chủ đại diện</li>
+                                <li>✓ Quốc hội được xác định là cơ quan quyền lực nhà nước cao nhất</li>
+                                <li>✓ Sự thống nhất đảm bảo mọi hoạt động hướng tới phục vụ lợi ích nhân dân</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="principle-card">
-                        <h4>Nguyên Tắc 2: Phân Công, Phối Hợp, Kiểm Soát</h4>
-                        <ul>
-                            <li>Dù quyền lực là thống nhất, bộ máy nhà nước được tổ chức theo nguyên tắc phân công</li>
-                            <li>Các cơ quan lập pháp, hành pháp và tư pháp được giao nhiệm vụ cụ thể</li>
-                            <li>Ba nhánh quyền lực phải phối hợp chặt chẽ để thực hiện các nhiệm vụ chung</li>
-                            <li>Kiểm soát quyền lực giữa các cơ quan để ngăn ngừa lạm quyền và tham nhũng</li>
-                            <li>Nhân dân giám sát thông qua phương châm "Dân biết, dân bàn, dân làm, dân kiểm tra"</li>
-                        </ul>
+                    <div class="principle-item">
+                        <div class="principle-number">2️⃣</div>
+                        <div class="principle-content">
+                            <h4>Phân Công, Phối Hợp và Kiểm Soát Quyền Lực</h4>
+                            <ul>
+                                <li>✓ Dù quyền lực là thống nhất, bộ máy được tổ chức theo nguyên tắc phân công</li>
+                                <li>✓ Các cơ quan lập pháp, hành pháp và tư pháp được giao nhiệm vụ cụ thể</li>
+                                <li>✓ Ba nhánh quyền lực phải phối hợp chặt chẽ để thực hiện các nhiệm vụ chung</li>
+                                <li>✓ Kiểm soát quyền lực giữa các cơ quan để ngăn ngừa lạm quyền và tham nhũng</li>
+                                <li>✓ Nhân dân giám sát thông qua phương châm "Dân biết, dân bàn, dân làm, dân kiểm tra"</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="principle-card">
-                        <h4>Nguyên Tắc 3: Tập Trung Dân Chủ</h4>
-                        <ul>
-                            <li>Bộ máy nhà nước vận hành theo nguyên tắc tập trung dân chủ</li>
-                            <li>Kết hợp sự tập trung thống nhất với phân công, phân cấp rõ ràng</li>
-                            <li>Bảo đảm sự chỉ đạo thống nhất từ Trung ương</li>
-                            <li>Phát huy tính chủ động của các địa phương</li>
-                            <li>Giữ vững sự ổn định và thống nhất của toàn bộ hệ thống chính trị</li>
-                        </ul>
+                    <div class="principle-item">
+                        <div class="principle-number">3️⃣</div>
+                        <div class="principle-content">
+                            <h4>Nguyên Tắc Tập Trung Dân Chủ</h4>
+                            <ul>
+                                <li>✓ Bộ máy nhà nước vận hành theo nguyên tắc tập trung dân chủ</li>
+                                <li>✓ Kết hợp sự tập trung thống nhất với phân công, phân cấp rõ ràng</li>
+                                <li>✓ Bảo đảm sự chỉ đạo thống nhất từ Trung ương</li>
+                                <li>✓ Phát huy tính chủ động của các địa phương</li>
+                                <li>✓ Giữ vững sự ổn định và thống nhất của toàn bộ hệ thống chính trị</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="principle-card">
-                        <h4>Nguyên Tắc 4: Thượng Tôn Hiến Pháp & Pháp Luật</h4>
-                        <ul>
-                            <li>Nhà nước được tổ chức và hoạt động trên cơ sở Hiến pháp và pháp luật</li>
-                            <li>Pháp luật được đặt ở vị trí tối cao để điều chỉnh quan hệ xã hội</li>
-                            <li>Mọi cơ quan nhà nước, cán bộ, công chức phải nghiêm chỉnh chấp hành pháp luật</li>
-                            <li>Bảo đảm tính nghiêm minh của kỷ cương xã hội</li>
-                        </ul>
+                    <div class="principle-item">
+                        <div class="principle-number">4️⃣</div>
+                        <div class="principle-content">
+                            <h4>Thượng Tôn Hiến Pháp & Pháp Luật</h4>
+                            <ul>
+                                <li>✓ Nhà nước được tổ chức và hoạt động trên cơ sở Hiến pháp và pháp luật</li>
+                                <li>✓ Pháp luật được đặt ở vị trí tối cao để điều chỉnh quan hệ xã hội</li>
+                                <li>✓ Mọi cơ quan nhà nước, cán bộ, công chức phải nghiêm chỉnh chấp hành pháp luật</li>
+                                <li>✓ Bảo đảm tính nghiêm minh của kỷ cương xã hội</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="info-box info-success">
-                    <h3>✓ Kết Luận</h3>
+                <div class="info-box info-green">
+                    <h3>✅ Kết Luận</h3>
                     <p>Mô hình này là sự kết hợp giữa việc tập trung quyền lực vào tay nhân dân với việc chuyên môn hóa hoạt động quản lý thông qua sự phân công quyền lực, dưới sự lãnh đạo duy nhất của Đảng Cộng sản Việt Nam để đảm bảo định hướng xã hội chủ nghĩa.</p>
                 </div>
             </div>
 
             <!-- Principles Section -->
-            <div id="principles" class="content-subsection">
-                <h2>Nguyên Tắc Vận Hành</h2>
-                <p>Các nguyên tắc này đã được trình bày chi tiết ở phần Cơ Cấu Tổ Chức.</p>
-                <div class="interactive-section">
-                    <h3>🎯 Test Kiến Thức</h3>
-                    <div class="question-box">
-                        <p><strong>Câu hỏi:</strong> Theo nguyên tắc quyền lực nhà nước là thống nhất, tất cả quyền lực nhà nước thuộc về ai?</p>
-                        <div class="answer-options">
-                            <button class="answer-btn" onclick="checkAnswer(true)">A. Nhân dân ✓</button>
-                            <button class="answer-btn" onclick="checkAnswer(false)">B. Quốc hội</button>
-                            <button class="answer-btn" onclick="checkAnswer(false)">C. Chính phủ</button>
-                            <button class="answer-btn" onclick="checkAnswer(false)">D. Đảng Cộng sản</button>
+            <div id="principles" class="content-section">
+                <h2>Nguyên Tắc Vận Hành - Chi Tiết</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 2rem;">Các nguyên tắc cơ bản này được trình bày chi tiết ở phần Cơ Cấu Tổ Chức và được minh họa qua hình ảnh dưới đây</p>
+                
+                <div class="interactive-grid">
+                    <div class="interactive-card">
+                        <div class="card-header blue">
+                            <span class="card-icon">⚙️</span>
+                            <h3>Nguyên Tắc 1</h3>
                         </div>
-                        <div id="answerFeedback"></div>
+                        <div class="card-body">
+                            <h4>Quyền Lực Thống Nhất</h4>
+                            <p>Không có sự chia cắt quyền lực mà là một thể thống nhất, tất cả quyền lực thuộc về nhân dân.</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card">
+                        <div class="card-header purple">
+                            <span class="card-icon">🔄</span>
+                            <h3>Nguyên Tắc 2</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Phân Công & Phối Hợp</h4>
+                            <p>Ba nhánh quyền lực có phân công rõ ràng nhưng phối hợp chặt chẽ để thực hiện nhiệm vụ chung.</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card">
+                        <div class="card-header orange">
+                            <span class="card-icon">📊</span>
+                            <h3>Nguyên Tắc 3</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Tập Trung Dân Chủ</h4>
+                            <p>Kết hợp tập trung thống nhất với phân cấp phù hợp, bảo đảm sự chỉ đạo của Trung ương.</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-card">
+                        <div class="card-header green">
+                            <span class="card-icon">📜</span>
+                            <h3>Nguyên Tắc 4</h3>
+                        </div>
+                        <div class="card-body">
+                            <h4>Thượng Tôn Hiến Pháp</h4>
+                            <p>Pháp luật được đặt ở vị trí tối cao, tất cả cơ quan nhà nước phải tuân thủ pháp luật.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-section">
+                    <h3>📝 Kiểm Tra Kiến Thức Nhanh</h3>
+                    <div class="quiz-box">
+                        <p class="quiz-question">Câu hỏi: Theo nguyên tắc quyền lực nhà nước là thống nhất, tất cả quyền lực nhà nước thuộc về ai?</p>
+                        <div class="quiz-options">
+                            <button class="quiz-btn" onclick="checkQuiz(true)">✓ A. Nhân dân</button>
+                            <button class="quiz-btn" onclick="checkQuiz(false)">✗ B. Quốc hội</button>
+                            <button class="quiz-btn" onclick="checkQuiz(false)">✗ C. Chính phủ</button>
+                            <button class="quiz-btn" onclick="checkQuiz(false)">✗ D. Đảng Cộng sản</button>
+                        </div>
+                        <div id="quizFeedback" class="quiz-feedback"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Leadership Section -->
-            <div id="leadership" class="content-subsection">
+            <div id="leadership" class="content-section">
                 <h2>Vai Trò Lãnh Đạo Của Đảng Cộng Sản Việt Nam</h2>
                 
-                <div class="info-box info-warning">
-                    <h3>⚠️ Đặc Trưng Cơ Bản</h3>
+                <div class="info-box info-yellow">
+                    <h3>⭐ Đặc Trưng Cơ Bản</h3>
                     <p>Đảng Cộng sản Việt Nam là lực lượng lãnh đạo Nhà nước và xã hội. Đây là một trong những đặc trưng cơ bản của mô hình Nhà nước pháp quyền xã hội chủ nghĩa ở nước ta, được khẳng định trong Điều 4 Hiến pháp năm 2013.</p>
                 </div>
 
-                <div class="tabs">
-                    <button class="tab-btn active" onclick="switchTab('tab1', this)">Vai Trò Lãnh Đạo</button>
-                    <button class="tab-btn" onclick="switchTab('tab2', this)">Định Hướng Phát Triển</button>
-                    <button class="tab-btn" onclick="switchTab('tab3', this)">Kiểm Soát & Giám Sát</button>
-                    <button class="tab-btn" onclick="switchTab('tab4', this)">Liên Hệ Nhân Dân</button>
-                </div>
+                <div class="tabs-container">
+                    <div class="tabs-nav">
+                        <button class="tab-button active" onclick="switchTab('tab1')">
+                            <span>🎯</span> Vai Trò Lãnh Đạo
+                        </button>
+                        <button class="tab-button" onclick="switchTab('tab2')">
+                            <span>📈</span> Định Hướng Phát Triển
+                        </button>
+                        <button class="tab-button" onclick="switchTab('tab3')">
+                            <span>🔍</span> Kiểm Soát & Giám Sát
+                        </button>
+                        <button class="tab-button" onclick="switchTab('tab4')">
+                            <span>👥</span> Liên Hệ Nhân Dân
+                        </button>
+                    </div>
 
-                <div id="tab1" class="tab-content active">
-                    <h3>Đảng là Lực Lượng Lãnh Đạo Toàn Diện</h3>
-                    <ul class="content-list">
-                        <li>Nhà nước được xây dựng và hoạt động dưới sự lãnh đạo của Đảng</li>
-                        <li>Sự lãnh đạo bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân</li>
-                        <li>Gắn bó chặt chẽ với nhân dân và dân tộc, kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội</li>
-                    </ul>
-                </div>
+                    <div class="tabs-content">
+                        <div id="tab1" class="tab-pane active">
+                            <h3>Đảng là Lực Lượng Lãnh Đạo Toàn Diện</h3>
+                            <div class="content-list">
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Nhà nước được xây dựng và hoạt động dưới sự lãnh đạo của Đảng</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Sự lãnh đạo bảo đảm cho Nhà nước giữ vững bản chất của giai cấp công nhân</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Gắn bó chặt chẽ với nhân dân và dân tộc, kiên định mục tiêu độc lập dân tộc gắn liền với chủ nghĩa xã hội</span>
+                                </div>
+                            </div>
+                        </div>
 
-                <div id="tab2" class="tab-content">
-                    <h3>Đảng Định Hướng Đường Lối & Chiến Lược</h3>
-                    <ul class="content-list">
-                        <li>Đảng giữ vai trò hoạch định đường lối, chủ trương và định hướng phát triển đất nước</li>
-                        <li>Thông qua các nghị quyết, chiến lược và chủ trương lớn</li>
-                        <li>Quốc hội, Chính phủ, Tòa án cụ thể hóa thành chính sách, pháp luật và chương trình hành động</li>
-                    </ul>
-                </div>
+                        <div id="tab2" class="tab-pane">
+                            <h3>Đảng Định Hướng Đường Lối & Chiến Lược</h3>
+                            <div class="content-list">
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Đảng giữ vai trò hoạch định đường lối, chủ trương và định hướng phát triển đất nước</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Thông qua các nghị quyết, chiến lược và chủ trương lớn</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Quốc hội, Chính phủ, Tòa án cụ thể hóa thành chính sách, pháp luật và chương trình hành động</span>
+                                </div>
+                            </div>
+                        </div>
 
-                <div id="tab3" class="tab-content">
-                    <h3>Đảng Lãnh Đạo Nhưng Không Thay Thế Chức Năng</h3>
-                    <ul class="content-list">
-                        <li>Các cơ quan nhà nước vẫn thực hiện đầy đủ quyền lập pháp, hành pháp và tư pháp</li>
-                        <li>Đảng không làm thay chức năng quản lý của Nhà nước</li>
-                        <li>Đảng thực hiện kiểm tra, giám sát và chính đoàn Đảng để phòng chống tham nhũng, lãng phí</li>
-                        <li>Này là cơ sở để xây dựng Nhà nước trong sạch, vững mạnh</li>
-                    </ul>
-                </div>
+                        <div id="tab3" class="tab-pane">
+                            <h3>Đảng Lãnh Đạo Nhưng Không Thay Thế Chức Năng</h3>
+                            <div class="content-list">
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Các cơ quan nhà nước vẫn thực hiện đầy đủ quyền lập pháp, hành pháp và tư pháp</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Đảng không làm thay chức năng quản lý của Nhà nước</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Đảng thực hiện kiểm tra, giám sát và chính đoàn Đảng để phòng chống tham nhũng, lãng phí</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Cơ sở để xây dựng Nhà nước trong sạch, vững mạnh và hiệu quả</span>
+                                </div>
+                            </div>
+                        </div>
 
-                <div id="tab4" class="tab-content">
-                    <h3>Đảng Gắn Bó Mật Thiết Với Nhân Dân</h3>
-                    <ul class="content-list">
-                        <li>Đảng xác định nguyên tắc "lấy dân làm gốc"</li>
-                        <li>Mọi chủ trương đều hướng tới lợi ích của nhân dân</li>
-                        <li>Thông qua sự lãnh đạo, Nhà nước hoàn thiện cơ chế cho nhân dân thực hiện quyền làm chủ</li>
-                        <li>Bảo đảm Nhà nước thực sự là Nhà nước của Nhân dân, do Nhân dân và vì Nhân dân</li>
-                    </ul>
+                        <div id="tab4" class="tab-pane">
+                            <h3>Đảng Gắn Bó Mật Thiết Với Nhân Dân</h3>
+                            <div class="content-list">
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Đảng xác định nguyên tắc "lấy dân làm gốc"</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Mọi chủ trương đều hướng tới lợi ích của nhân dân</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Thông qua sự lãnh đạo, Nhà nước hoàn thiện cơ chế cho nhân dân thực hiện quyền làm chủ</span>
+                                </div>
+                                <div class="list-item">
+                                    <span class="list-icon">📌</span>
+                                    <span>Bảo đảm Nhà nước thực sự là Nhà nước của Nhân dân, do Nhân dân và vì Nhân dân</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Accountability Section -->
-            <div id="accountability" class="content-subsection">
+            <div id="accountability" class="content-section">
                 <h2>Trách Nhiệm Giải Trình Của Các Cơ Quan Nhà Nước</h2>
                 
-                <div class="info-box info-primary">
-                    <h3>📌 Cơ Sở Hình Thành</h3>
-                    <p>Để hiểu vì sao các cơ quan nhà nước phải giải trình trước Nhân dân, trước hết cần xuất phát từ bản chất của Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam. Theo Hiến pháp năm 2013, tất cả quyền lực nhà nước thuộc về Nhân dân. Điều này có nghĩa là các cơ quan nhà nước không phải là chủ thể nắm giữ quyền lực cho riêng mình mà là những cơ quan được Nhân dân trao quyền để thay mặt Nhân dân quản lý và điều hành đất nước.</p>
+                <div class="info-box info-red">
+                    <h3>📍 Cơ Sở Hình Thành</h3>
+                    <p>Để hiểu vì sao các cơ quan nhà nước phải giải trình trước Nhân dân, trước hết cần xuất phát từ bản chất của Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam. Theo Hiến pháp năm 2013, <strong>tất cả quyền lực nhà nước thuộc về Nhân dân</strong>. Điều này có nghĩa là các cơ quan nhà nước không phải là chủ thể nắm giữ quyền lực cho riêng mình mà là những cơ quan được Nhân dân trao quyền để thay mặt Nhân dân quản lý và điều hành đất nước.</p>
                 </div>
 
-                <div class="two-column-layout">
-                    <div class="column">
-                        <h3>🏛️ Quốc Hội</h3>
-                        <div class="responsibility-card">
+                <div class="responsibility-grid">
+                    <div class="responsibility-card">
+                        <div class="resp-header resp-blue">
+                            <span class="resp-icon">🏛️</span>
+                            <h3>Quốc Hội</h3>
+                        </div>
+                        <div class="resp-body">
                             <h4>Trách Nhiệm Giải Trình:</h4>
                             <ul>
-                                <li>Đại biểu Quốc hội thường xuyên tiếp xúc cử tri</li>
-                                <li>Lắng nghe ý kiến, kiến nghị của Nhân dân</li>
-                                <li>Phản ánh những ý kiến vào hoạt động lập pháp, giám sát</li>
-                                <li>Chịu trách nhiệm trước cử tri và báo cáo việc thực hiện nhiệm vụ</li>
+                                <li>✓ Đại biểu thường xuyên tiếp xúc cử tri</li>
+                                <li>✓ Lắng nghe ý kiến, kiến nghị của Nhân dân</li>
+                                <li>✓ Phản ánh vào hoạt động lập pháp, giám sát</li>
+                                <li>✓ Báo cáo việc thực hiện nhiệm vụ trước cử tri</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="column">
-                        <h3>⚙️ Chính Phủ</h3>
-                        <div class="responsibility-card">
-                            <h4>Trách Nhiệm Giải Trình:</h4>
-                            <ul>
-                                <li>Công khai, minh bạch các chính sách, chương trình</li>
-                                <li>Giải thích cho người dân các quyết định hành chính</li>
-                                <li>Tiếp nhận và xử lý phản ánh, kiến nghị của công dân</li>
-                                <li>Chịu sự giám sát của Quốc hội, Hội đồng nhân dân và Nhân dân</li>
-                            </ul>
+                    <div class="responsibility-card">
+                        <div class="resp-header resp-green">
+                            <span class="resp-icon">⚙️</span>
+                            <h3>Chính Phủ</h3>
                         </div>
-                    </div>
-                </div>
-
-                <div class="two-column-layout">
-                    <div class="column">
-                        <h3>⚖️ Tòa Án & Viện Kiểm Sát</h3>
-                        <div class="responsibility-card">
+                        <div class="resp-body">
                             <h4>Trách Nhiệm Giải Trình:</h4>
                             <ul>
-                                <li>Bảo đảm mọi hoạt động xét xử, truy tố tuân thủ Hiến pháp và pháp luật</li>
-                                <li>Công khai bản án, quyết định theo quy định</li>
-                                <li>Giải thích rõ căn cứ pháp lý của các phán quyết</li>
-                                <li>Bảo vệ công lý, quyền con người và quyền công dân</li>
+                                <li>✓ Công khai, minh bạch chính sách, chương trình</li>
+                                <li>✓ Giải thích quyết định hành chính cho người dân</li>
+                                <li>✓ Tiếp nhận và xử lý phản ánh của công dân</li>
+                                <li>✓ Chịu sự giám sát của Quốc hội và Nhân dân</li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="column">
-                        <h3>👥 Cộng Đồng Giám Sát</h3>
-                        <div class="responsibility-card">
+                    <div class="responsibility-card">
+                        <div class="resp-header resp-purple">
+                            <span class="resp-icon">⚖️</span>
+                            <h3>Tòa Án & Viện Kiểm Sát</h3>
+                        </div>
+                        <div class="resp-body">
+                            <h4>Trách Nhiệm Giải Trình:</h4>
+                            <ul>
+                                <li>✓ Bảo đảm hoạt động tuân thủ Hiến pháp và pháp luật</li>
+                                <li>✓ Công khai bản án, quyết định theo quy định</li>
+                                <li>✓ Giải thích căn cứ pháp lý của các phán quyết</li>
+                                <li>✓ Bảo vệ công lý và quyền con người</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="responsibility-card">
+                        <div class="resp-header resp-orange">
+                            <span class="resp-icon">👥</span>
+                            <h3>Cộng Đồng Giám Sát</h3>
+                        </div>
+                        <div class="resp-body">
                             <h4>Hình Thức Giám Sát:</h4>
                             <ul>
-                                <li>Bầu cử Quốc hội và Hội đồng nhân dân</li>
-                                <li>Tiếp xúc cử tri với các đại biểu</li>
-                                <li>Khiếu nại, tố cáo, phản biện xã hội</li>
-                                <li>Giám sát của Mặt trận Tổ quốc và các tổ chức chính trị - xã hội</li>
+                                <li>✓ Bầu cử Quốc hội, Hội đồng nhân dân</li>
+                                <li>✓ Tiếp xúc cử tri với đại biểu</li>
+                                <li>✓ Khiếu nại, tố cáo, phản biện xã hội</li>
+                                <li>✓ Giám sát của Mặt trận Tổ quốc và các tổ chức chính trị</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="info-box info-success">
+                <div class="info-box info-blue">
                     <h3>💡 Mối Liên Hệ Hai Chiều</h3>
-                    <p>Mối quan hệ giữa các cơ quan nhà nước và Nhân dân là một mối quan hệ hai chiều: Nhân dân trao quyền cho Nhà nước thực hiện quản lý xã hội, còn Nhà nước phải phục vụ Nhân dân, chịu sự giám sát của Nhân dân và có trách nhiệm giải trình trước Nhân dân. Đây chính là một trong những biểu hiện quan trọng nhất của bản chất Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam - Nhà nước của Nhân dân, do Nhân dân và vì Nhân dân.</p>
+                    <p>Mối quan hệ giữa các cơ quan nhà nước và Nhân dân là một mối quan hệ hai chiều: <strong>Nhân dân trao quyền cho Nhà nước</strong> thực hiện quản lý xã hội, còn <strong>Nhà nước phải phục vụ Nhân dân, chịu sự giám sát của Nhân dân và có trách nhiệm giải trình</strong> trước Nhân dân. Đây chính là một trong những biểu hiện quan trọng nhất của bản chất Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam - <strong>Nhà nước của Nhân dân, do Nhân dân và vì Nhân dân</strong>.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Game Section -->
-        <section id="game" class="section">
-            <div class="game-container">
-                <!-- Waiting Room -->
-                <div id="waitingRoom" class="game-screen">
+        <!-- ===== GAME PAGE ===== -->
+        <section id="game" class="page">
+            <div class="game-wrapper">
+                <!-- Waiting Room Screen -->
+                <div id="waitingRoom" class="game-screen active">
                     <div class="waiting-content">
-                        <h1>🎮 Mini Game Đảng Bộ</h1>
+                        <h1>🎮 Mini Game Trí Tuệ</h1>
                         <p>Kiểm tra kiến thức về Nhà nước pháp quyền XHCN Việt Nam</p>
                         
-                        <div class="waiting-info">
+                        <div class="game-info-boxes">
                             <div class="info-item">
-                                <span class="info-label">Chế độ:</span>
-                                <span class="info-value">Thi Đấu Trực Tuyến</span>
+                                <span class="info-icon">⏱️</span>
+                                <span class="info-text">
+                                    <strong>Thời Gian:</strong><br>2 phút
+                                </span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Thời gian:</span>
-                                <span class="info-value">2 phút</span>
+                                <span class="info-icon">📝</span>
+                                <span class="info-text">
+                                    <strong>Câu Hỏi:</strong><br>50 câu
+                                </span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Câu hỏi:</span>
-                                <span class="info-value">50 câu</span>
+                                <span class="info-icon">⭐</span>
+                                <span class="info-text">
+                                    <strong>Điểm/Câu:</strong><br>Đúng +100, Sai -50
+                                </span>
                             </div>
                             <div class="info-item">
-                                <span class="info-label">Số người chơi:</span>
-                                <span class="info-value" id="playerCount">1</span>
+                                <span class="info-icon">👥</span>
+                                <span class="info-text">
+                                    <strong>Người Chơi:</strong><br><span id="playerCountDisplay">0</span> người
+                                </span>
                             </div>
                         </div>
 
-                        <div class="player-list">
-                            <h3>Danh Sách Người Chơi:</h3>
-                            <div id="playersList" class="players-grid"></div>
+                        <div class="players-section">
+                            <h3>📋 Danh Sách Người Chơi</h3>
+                            <div id="playersList" class="players-list"></div>
                         </div>
 
-                        <div class="waiting-buttons">
-                            <input type="text" id="playerName" placeholder="Nhập tên của bạn" class="player-input" maxlength="20">
-                            <button class="btn btn-primary" onclick="joinGame()">Tham Gia Game</button>
+                        <div class="join-section">
+                            <input type="text" id="playerName" placeholder="Nhập tên của bạn (tối đa 20 ký tự)" 
+                                   class="player-input" maxlength="20" onkeypress="if(event.key==='Enter') joinGame()">
+                            <button class="btn btn-primary btn-lg" onclick="joinGame()">
+                                ➕ Tham Gia Game
+                            </button>
                         </div>
 
-                        <div id="adminStartButton" class="admin-start-hidden">
-                            <button class="btn btn-danger btn-large" onclick="startGame()">🎮 Bắt Đầu Trò Chơi (Admin)</button>
+                        <div id="adminStartSection" class="admin-start-hidden">
+                            <button class="btn btn-danger btn-lg btn-start" onclick="startGame()">
+                                🚀 ADMIN: BẮT ĐẦU GAME
+                            </button>
+                        </div>
+
+                        <div class="game-rules">
+                            <h4>📋 Quy Tắc Chơi:</h4>
+                            <ul>
+                                <li>✓ Trả lời đúng: +100 điểm</li>
+                                <li>✓ Trả lời sai: -50 điểm (nếu có điểm), bị phạt chờ 5 giây</li>
+                                <li>✓ Thời gian hết, game kết thúc tự động</li>
+                                <li>✓ Bảng xếp hạng sẽ hiển thị sau khi game kết thúc</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Game Screen -->
-                <div id="gameScreen" class="game-screen hidden">
-                    <div class="game-header">
-                        <div class="game-timer">
-                            <span id="timer">2:00</span>
+                <!-- Game Playing Screen -->
+                <div id="gameScreen" class="game-screen">
+                    <div class="game-top-bar">
+                        <div class="top-bar-left">
+                            <div class="timer-box">
+                                <span class="timer-label">⏱️ Thời Gian</span>
+                                <span class="timer-display" id="gameTimer">2:00</span>
+                            </div>
                         </div>
-                        <div class="game-score">
-                            <span>Câu: <span id="questionNum">0</span>/50</span>
-                            <span>Điểm: <span id="score">0</span></span>
+                        <div class="top-bar-center">
+                            <div class="score-box">
+                                <span class="score-label">📊 Điểm</span>
+                                <span class="score-display" id="gameScore">0</span>
+                            </div>
                         </div>
-                        <div class="game-player">
-                            <span id="gamePlayerName"></span>
+                        <div class="top-bar-right">
+                            <div class="player-info">
+                                <span class="player-label">👤</span>
+                                <span class="player-name" id="gamePlayerName"></span>
+                            </div>
+                            <div class="question-count">
+                                <span id="questionCounter">1</span>/50
+                            </div>
                         </div>
                     </div>
 
-                    <div class="game-content">
-                        <div id="questionContainer" class="question-container"></div>
-                        <div id="penaltyContainer" class="penalty-container hidden">
-                            <div class="penalty-message">
+                    <div class="game-main">
+                        <div id="questionArea" class="question-area"></div>
+                        
+                        <div id="penaltyArea" class="penalty-area hidden">
+                            <div class="penalty-box">
                                 <h3>❌ Trả Lời Sai!</h3>
-                                <p>Bị phạt chờ <span id="penaltyTime">5</span>s</p>
+                                <p>Bị phạt chờ <span id="penaltyTimeDisplay">5</span>s</p>
+                                <div class="penalty-progress">
+                                    <div id="penaltyBar" class="penalty-bar"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Results Screen -->
-                <div id="resultsScreen" class="game-screen hidden">
+                <div id="resultsScreen" class="game-screen">
                     <div class="results-content">
-                        <h1>🏆 Kết Quả Trò Chơi</h1>
-                        
-                        <div class="results-summary">
-                            <div class="summary-item">
-                                <span class="label">Tên Người Chơi:</span>
-                                <span class="value" id="resultPlayerName"></span>
+                        <div class="results-header">
+                            <h1>🏆 KẾT QUẢ TRÒ CHƠI</h1>
+                            <p>Hoàn thành trò chơi!</p>
+                        </div>
+
+                        <div class="results-summary-box">
+                            <div class="summary-row">
+                                <span class="summary-label">👤 Người Chơi:</span>
+                                <span class="summary-value" id="resultPlayerName"></span>
                             </div>
-                            <div class="summary-item">
-                                <span class="label">Tổng Điểm:</span>
-                                <span class="value" id="resultScore"></span>
+                            <div class="summary-row">
+                                <span class="summary-label">⭐ Tổng Điểm:</span>
+                                <span class="summary-value highlight" id="resultTotalScore"></span>
                             </div>
-                            <div class="summary-item">
-                                <span class="label">Câu Đúng:</span>
-                                <span class="value" id="resultCorrect"></span>
+                            <div class="summary-row">
+                                <span class="summary-label">✅ Câu Đúng:</span>
+                                <span class="summary-value" id="resultCorrectCount"></span>
                             </div>
-                            <div class="summary-item">
-                                <span class="label">Câu Sai:</span>
-                                <span class="value" id="resultWrong"></span>
+                            <div class="summary-row">
+                                <span class="summary-label">❌ Câu Sai:</span>
+                                <span class="summary-value" id="resultWrongCount"></span>
                             </div>
                         </div>
 
-                        <h2>🥇 Bảng Xếp Hạng</h2>
-                        <table class="ranking-table">
-                            <thead>
-                                <tr>
-                                    <th>Hạng</th>
-                                    <th>Tên Người Chơi</th>
-                                    <th>Điểm</th>
-                                    <th>Đúng/Sai</th>
-                                </tr>
-                            </thead>
-                            <tbody id="rankingTableBody">
-                            </tbody>
-                        </table>
+                        <h2>🥇 BẢNG XẾP HẠNG CHUNG CUỘC</h2>
+                        <div class="ranking-container">
+                            <table class="ranking-table">
+                                <thead>
+                                    <tr>
+                                        <th class="rank-col">Hạng</th>
+                                        <th class="name-col">Tên Người Chơi</th>
+                                        <th class="score-col">Điểm</th>
+                                        <th class="stats-col">Đúng/Sai</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rankingBody">
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <div class="results-buttons">
-                            <button class="btn btn-primary" onclick="resetGame()">🔄 Chơi Lại</button>
-                            <button class="btn btn-secondary" onclick="navigateTo('home')">🏠 Quay Về Trang Chủ</button>
+                        <div class="results-actions">
+                            <button class="btn btn-primary btn-lg" onclick="resetGame()">
+                                🔄 Chơi Lại
+                            </button>
+                            <button class="btn btn-secondary btn-lg" onclick="navigateTo('home')">
+                                🏠 Quay Về Trang Chủ
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -472,8 +689,8 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p>&copy; 2024 Nhà Nước Pháp Quyền XHCN Việt Nam - MLN131 Nhóm 3</p>
-            <p>Để học tập và kiểm tra kiến thức</p>
+            <p>&copy; 2024 Mô Hình Nhà Nước Pháp Quyền XHCN Việt Nam</p>
+            <p>MLN131 Nhóm 3 - Dự Án Học Tập & Kiểm Tra Kiến Thức</p>
         </div>
     </footer>
 
